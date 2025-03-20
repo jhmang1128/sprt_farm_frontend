@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입 페이지</title>
+    <link rel="stylesheet" href="css/user_information.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="nav-left">
+          <a href="#" class="nav-link">문의</a>
+        </div>
+        <div class="nav-right">
+          <a href="#" class="nav-button">로그인</a>
+          <a href="#" class="nav-button signup-active">회원가입</a>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <h1 class="signup-title">회원가입</h1>
+
+        <form class="signup-form">
+          <div class="form-group">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" />
+          </div>
+
+          <div class="form-group">
+            <label for="birthdate">생년월일</label>
+            <input
+              type="text"
+              id="birthdate"
+              name="birthdate"
+              placeholder="YYYYMMDD"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="region">지역</label>
+            <input type="text" id="region" name="region" />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">휴대폰</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="01012345678"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">이메일주소</label>
+            <input type="email" id="email" name="email" />
+          </div>
+
+          <div class="form-group">
+            <label for="equipment">보유 장비 유형</label>
+            <input type="text" id="equipment" name="equipment" />
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="save-button">내용을 저장</button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,408 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styles */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-inner {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-image: url("../image/logo.jpg");
+  background-color: #f0f9ff;
+}
+
+.site-title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.site-subtitle {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #333;
+}
+
+.btn-primary {
+  background-color: #15803d;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #166534;
+}
+
+.btn-outline {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  color: #333;
+}
+
+/* Main Content Styles */
+main {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 64px 16px 128px;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../image/meadow.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: brightness(55%);
+  z-index: -1;
+}
+
+.search-container {
+  max-width: 800px;
+  width: 100%;
+}
+
+.search-title {
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+}
+
+.search-box {
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 4px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.search-type {
+  position: relative;
+  width: 128px;
+}
+
+.search-type-select {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #e5e7eb;
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+  appearance: none;
+}
+
+.search-type::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #6b7280;
+  pointer-events: none;
+}
+
+.search-input {
+  flex: 1;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #e5e7eb;
+  border-left: none;
+  border-right: none;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 0 4px 4px 0;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  color: #6b7280;
+}
+
+.filter-options {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 0 8px;
+}
+
+.filter-select {
+  width: 96px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 12px;
+  cursor: pointer;
+  appearance: none;
+  position: relative;
+}
+
+.weather-widget {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  margin: 0 8px 8px;
+  padding: 12px;
+}
+
+.weather-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.weather-title {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.weather-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.tab-today {
+  color: #3b82f6;
+}
+
+.tab-divider {
+  color: #d1d5db;
+}
+
+.tab-tomorrow {
+  color: #6b7280;
+}
+
+.weather-content {
+  display: flex;
+  align-items: center;
+}
+
+.current-temp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.temp-value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.feels-like {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.hourly-forecast {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.hour-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hour {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.hour-icon {
+  width: 16px;
+  height: 16px;
+  background-color: #f3f4f6;
+  border-radius: 50%;
+  margin: 4px 0;
+}
+
+.hour-temp {
+  font-size: 12px;
+}
+
+.calendar {
+  margin-top: 16px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.day-name {
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.date {
+  text-align: center;
+  font-size: 12px;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.date:hover {
+  background-color: #f3f4f6;
+}
+
+/* Footer Styles */
+footer {
+  background-color: white;
+  padding: 16px;
+}
+
+.footer-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tech-support {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.social-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.company-info {
+  font-size: 12px;
+  color: #6b7280;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .footer-top {
+    margin-bottom: 0;
+  }
+
+  .company-info {
+    text-align: right;
+  }
+}

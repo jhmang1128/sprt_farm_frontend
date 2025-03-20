@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>내정보 페이지</title>
+    <link rel="stylesheet" href="css/mypage.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="nav-left">
+          <a href="#" class="nav-link">Home</a>
+          <a href="#" class="nav-link">문의</a>
+        </div>
+        <div class="nav-right">
+          <a href="#" class="nav-button profile-active">내정보</a>
+          <a href="#" class="nav-button">로그아웃</a>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- My Info Section -->
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">내정보</h2>
+            <button class="edit-button">편집수정</button>
+          </div>
+        </div>
+
+        <!-- Basic Information Section -->
+        <div class="section">
+          <h3 class="subsection-title">기본정보</h3>
+
+          <div class="info-grid">
+            <div class="info-row">
+              <div class="info-item">
+                <div class="info-label">이름</div>
+                <div class="info-value">홍길동</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">E-mail</div>
+                <div class="info-value">hong@example.com</div>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-item">
+                <div class="info-label">생년월일</div>
+                <div class="info-value">1990-01-01</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">지역</div>
+                <div class="info-value">서울특별시</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Additional Information Section -->
+        <div class="section">
+          <h3 class="subsection-title">추가정보</h3>
+
+          <div class="info-grid">
+            <div class="info-row">
+              <div class="info-item">
+                <div class="info-label">주요 작물</div>
+                <div class="info-value">감자, 고구마, 옥수수</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">보유 장비 현황</div>
+                <div class="info-value">트랙터, 경운기</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">필지수</div>
+                <div class="info-value">3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Account Management Section -->
+        <div class="section">
+          <h3 class="subsection-title">계정 관리</h3>
+
+          <div class="account-actions">
+            <button class="delete-button">회원탈퇴</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

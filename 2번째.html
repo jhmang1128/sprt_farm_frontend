@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>들어와라, 내땅에 - 토양 분석</title>
+    <link rel="stylesheet" href="css/2번째.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="logo-container">
+          <div class="logo">
+            <img
+              src="https://via.placeholder.com/40/16a34a/ffffff?text=🌱"
+              alt="Logo"
+            />
+          </div>
+          <div class="title-container">
+            <h1 class="site-title">들어와라, 내땅에</h1>
+            <span class="site-subtitle">comeon, my ground</span>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <a href="#" class="nav-btn inquiry">문의</a>
+          <a href="#" class="nav-btn my-info">내정보</a>
+          <a href="#" class="nav-btn logout">로그아웃</a>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Background Curves -->
+        <div class="background-curves">
+          <div class="curve-top"></div>
+          <div class="curve-bottom"></div>
+          <div class="red-curve"></div>
+        </div>
+
+        <!-- Location Info -->
+        <div class="location-info">
+          전북특별자치도 순창군 풍산면 아미로 379의 토양화학성
+        </div>
+
+        <!-- Soil Analysis Table -->
+        <div class="soil-table-container">
+          <table class="soil-table">
+            <thead>
+              <tr>
+                <th>N (질소)</th>
+                <th>P (인산)</th>
+                <th>K (칼륨)</th>
+                <th>Ca (칼슘)</th>
+                <th>Mg (마그네슘)</th>
+                <th>Fe (철)</th>
+                <th>Mn (망간)</th>
+                <th>Zn (아연)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>0.1~2.5</td>
+                <td>5</td>
+                <td>2.6</td>
+                <td>1.1</td>
+                <td>0.3</td>
+                <td>0.6</td>
+                <td>8</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Crop Buttons -->
+        <div class="crop-buttons-container">
+          <div class="crop-row">
+            <button class="crop-btn" data-crop="potato">감자</button>
+            <button class="crop-btn" data-crop="potato">감자</button>
+            <button class="crop-btn" data-crop="potato">감자</button>
+          </div>
+
+          <div class="crop-row">
+            <button class="crop-btn" data-crop="ginger">생강</button>
+            <button class="crop-btn" data-crop="ginger">생강</button>
+            <button class="crop-btn" data-crop="ginger">생강</button>
+          </div>
+
+          <div class="crop-row">
+            <button class="crop-btn" data-crop="garlic">마늘</button>
+            <button class="crop-btn" data-crop="garlic">마늘</button>
+            <button class="crop-btn" data-crop="garlic">마늘</button>
+          </div>
+        </div>
+
+        <!-- Crop Info Panel (Hidden by default) -->
+        <div id="cropInfoPanel" class="crop-info-panel">
+          <div class="panel-header">
+            <h3 id="cropTitle">작물 정보</h3>
+            <button id="closePanel" class="close-btn">×</button>
+          </div>
+          <div class="panel-content">
+            <div id="cropImage" class="crop-image"></div>
+            <div id="cropDescription" class="crop-description"></div>
+            <div class="nutrient-requirements">
+              <h4>필요한 영양소</h4>
+              <div id="nutrientChart" class="nutrient-chart"></div>
+            </div>
+            <div class="growing-season">
+              <h4>재배 시기</h4>
+              <div id="seasonChart" class="season-chart"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
