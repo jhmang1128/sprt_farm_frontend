@@ -4,19 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입 페이지</title>
-    <link rel="stylesheet" href="css/user_information.css" />
+    <link rel="stylesheet" href="css/signup.css" />
   </head>
   <body>
     <div class="container">
       <!-- Header -->
       <header class="header">
-        <div class="nav-left">
-          <a href="#" class="nav-link">문의</a>
-        </div>
+        <div class="nav-left"></div>
         <div class="nav-right">
-          <a href="#" class="nav-button">로그인</a>
-          <a href="#" class="nav-button signup-active">회원가입</a>
-        </div>
+        <a>들어와라 내땅에</a>
+          
       </header>
 
       <!-- Main Content -->
@@ -25,11 +22,11 @@
 
         <form class="signup-form">
           <div class="form-group">
-            <label for="name">이름</label>
-            <input type="text" id="name" name="name" />
+            <label for="id">ID</label>
+            <input type="text" id="username" name="username" />
           </div>
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="birthdate">생년월일</label>
             <input
               type="text"
@@ -52,7 +49,7 @@
               name="phone"
               placeholder="01012345678"
             />
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="email">이메일주소</label>
@@ -60,17 +57,17 @@
           </div>
 
           <div class="form-group">
-            <label for="equipment">보유 장비 유형</label>
-            <input type="text" id="equipment" name="equipment" />
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" />
           </div>
 
           <div class="form-actions">
-            <button type="submit" class="save-button">내용을 저장</button>
+            <button type="submit" class="save-button">가입</button>
           </div>
         </form>
       </main>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/signup.js"></script>
   </body>
 </html>
