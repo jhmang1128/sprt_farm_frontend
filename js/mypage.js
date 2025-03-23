@@ -72,7 +72,7 @@ function toggleEditMode() {
       })
       .then((data) => {
         alert("정보가 성공적으로 저장되었습니다.");
-        editButton.textContent = "편집수정";
+        editButton.textContent = "수정";
       })
       .catch((err) => {
         alert("저장에 실패했습니다.");
