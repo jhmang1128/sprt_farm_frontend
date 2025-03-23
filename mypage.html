@@ -25,7 +25,7 @@
         <div class="section">
           <div class="section-header">
             <h2 class="section-title">내정보</h2>
-            <a href="mypage_edit.html" class="nav-button">편집수정</a>
+            <button class="nav-button edit-button">편집수정</button>
           </div>
         </div>
 
@@ -37,22 +37,22 @@
             <div class="info-row">
               <div class="info-item">
                 <div class="info-label">이름</div>
-                <div class="info-value">홍길동</div>
+                <div class="info-value" data-field="username"></div>
               </div>
               <div class="info-item">
                 <div class="info-label">E-mail</div>
-                <div class="info-value">hong@example.com</div>
+                <div class="info-value" data-field="email"></div>
               </div>
             </div>
 
             <div class="info-row">
               <div class="info-item">
                 <div class="info-label">생년월일</div>
-                <div class="info-value">1990-01-01</div>
+                <div class="info-value" data-field="birthdate"></div>
               </div>
               <div class="info-item">
                 <div class="info-label">지역</div>
-                <div class="info-value">서울특별시</div>
+                <div class="info-value" data-field="region"></div>
               </div>
             </div>
           </div>
@@ -68,15 +68,15 @@
             <div class="info-row">
               <div class="info-item">
                 <div class="info-label">주요 작물</div>
-                <div class="info-value">감자, 고구마, 옥수수</div>
+                <div class="info-value" data-field="crops"></div>
               </div>
               <div class="info-item">
                 <div class="info-label">보유 장비 현황</div>
-                <div class="info-value">트랙터, 경운기</div>
+                <div class="info-value" data-field="equipment"></div>
               </div>
               <div class="info-item">
                 <div class="info-label">필지수</div>
-                <div class="info-value">3</div>
+                <div class="info-value" data-key="land_count"></div>
               </div>
             </div>
           </div>
@@ -89,12 +89,53 @@
           <h3 class="subsection-title">계정 관리</h3>
 
           <div class="account-actions">
-            <a href="index.html" class="delete-button">회원탈퇴</a>
+            <a href="#" class="delete-button">회원탈퇴</a>
           </div>
         </div>
       </main>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async function () {
+        const token = localStorage.getItem("token");
+        if (!token) return alert("로그인이 필요합니다.");
+
+        try {
+          const response = await fetch("http://127.0.0.1:8000/users/profile/", {
+            method: "GET",
+            headers: {
+              Authorization: `Token ${token}`,
+            },
+          });
+          const data = await response.json();
+
+          if (response.ok) {
+            const mapping = {
+              username: data.username,
+              email: data.email,
+              birthdate: data.birthdate,
+              region: data.region,
+              crops: data.crops,
+              equipment: data.equipment,
+              land_count: data.land_count || "-",
+            };
+
+            Object.keys(mapping).forEach((key) => {
+              const el =
+                document.querySelector(`.info-value[data-field="${key}"]`) ||
+                document.querySelector(`.info-value[data-key="${key}"]`);
+              if (el) el.textContent = mapping[key] || "";
+            });
+          } else {
+            alert("사용자 정보를 불러오는 데 실패했습니다.");
+          }
+        } catch (err) {
+          console.error("프로필 요청 오류:", err);
+          alert("서버 오류로 사용자 정보를 불러올 수 없습니다.");
+        }
+      });
+    </script>
+
+    <script src="js/mypage.js"></script>
   </body>
 </html>

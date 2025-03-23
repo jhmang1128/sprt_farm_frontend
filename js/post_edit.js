@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function (e) {
   // Form submission handling
   const inquiryForm = document.querySelector(".inquiry-form");
 
@@ -9,33 +9,39 @@ document.addEventListener("DOMContentLoaded", function () {
     const title = document.getElementById("title").value;
     const content = document.getElementById("content").value;
 
-    // Validate form
-    if (!title) {
-      alert("제목을 입력해주세요.");
+    if (!title || !content) {
+      alert("제목과 내용을 모두 입력해주세요.");
+      return;
+    }
+    // 토큰 가져오기
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+      window.location.href = "login.html";
       return;
     }
 
-    if (!content) {
-      alert("내용을 입력해주세요.");
-      return;
-    }
-
-    // For demo purposes, just show the entered data
-    console.log("문의글 작성:", {
-      title,
-      content,
-    });
-
-    // Simulate submission success
-    alert("문의글이 성공적으로 등록되었습니다.");
-
-    // Redirect to inquiry list page
-    // In a real application, this would navigate to the inquiry list page
-    setTimeout(() => {
-      alert("문의 목록 페이지로 이동합니다.");
-    }, 500);
+    fetch("http://127.0.0.1:8000/api/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`, // 인증 헤더
+      },
+      body: JSON.stringify({ title, content }),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("서버 오류 또는 권한 없음");
+        return response.json();
+      })
+      .then((data) => {
+        alert("문의글이 성공적으로 등록되었습니다.");
+        window.location.href = "post_main.html"; // 성공 시 목록으로 이동
+      })
+      .catch((error) => {
+        console.error("글 등록 실패:", error);
+        alert("글 작성에 실패했습니다. 다시 시도해주세요.");
+      });
   });
-
   // Cancel button handling
   const cancelButton = document.querySelector(".cancel-button");
 

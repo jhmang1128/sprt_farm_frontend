@@ -9,18 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Delete account button functionality
-  const deleteButton = document.querySelector(".delete-button");
-
-  deleteButton.addEventListener("click", function () {
-    if (
-      confirm(
-        "정말로 회원탈퇴를 진행하시겠습니까? 이 작업은 되돌릴 수 없습니다."
-      )
-    ) {
-      alert("회원탈퇴가 완료되었습니다.");
-      // In a real application, this would send a request to delete the account
-    }
-  });
 
   // Navigation button handling
   const navButtons = document.querySelectorAll(".nav-button");
@@ -53,27 +41,85 @@ function toggleEditMode() {
   const infoValues = document.querySelectorAll(".info-value");
   const editButton = document.querySelector(".edit-button");
 
-  // Check if we're already in edit mode
   const isEditMode = editButton.textContent === "저장";
 
   if (isEditMode) {
-    // Save the edited values and switch back to view mode
+    // ✅ 수정 저장 모드 → API 요청 보내기
+    const updatedData = {};
+
     infoValues.forEach((value) => {
       const input = value.querySelector("input");
       if (input) {
-        value.textContent = input.value;
+        const field = input.dataset.field;
+        updatedData[field] = input.value;
+        value.textContent = input.value; // UI 업데이트
       }
     });
 
-    editButton.textContent = "편집수정";
-    alert("정보가 성공적으로 저장되었습니다.");
+    const token = localStorage.getItem("token");
+
+    fetch("http://127.0.0.1:8000/users/update/", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("수정 실패");
+        return res.json();
+      })
+      .then((data) => {
+        alert("정보가 성공적으로 저장되었습니다.");
+        editButton.textContent = "편집수정";
+      })
+      .catch((err) => {
+        alert("저장에 실패했습니다.");
+        console.error(err);
+      });
   } else {
-    // Switch to edit mode
+    // ✅ 편집 모드 전환
     infoValues.forEach((value) => {
       const currentValue = value.textContent;
-      value.innerHTML = `<input type="text" class="edit-input" value="${currentValue}">`;
+      const field = value.dataset.field; // HTML에 data-field 있어야 함
+      value.innerHTML = `<input type="text" class="edit-input" value="${currentValue}" data-field="${field}">`;
     });
 
     editButton.textContent = "저장";
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const deleteButton = document.querySelector(".delete-button");
+
+  deleteButton.addEventListener("click", async function () {
+    const confirmDelete = confirm("정말로 회원탈퇴를 진행하시겠습니까?");
+
+    if (!confirmDelete) return;
+
+    const token = localStorage.getItem("token");
+    if (!token) return alert("로그인이 필요합니다.");
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/users/delete/", {
+        method: "DELETE",
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        alert("회원탈퇴가 완료되었습니다.");
+        localStorage.removeItem("token");
+        window.location.href = "index.html"; // 홈으로 이동
+      } else {
+        const errorData = await response.json();
+        alert("회원탈퇴 실패: " + (errorData.message || "서버 오류"));
+      }
+    } catch (err) {
+      console.error("회원탈퇴 오류:", err);
+      alert("서버와 통신 중 문제가 발생했습니다.");
+    }
+  });
+});
