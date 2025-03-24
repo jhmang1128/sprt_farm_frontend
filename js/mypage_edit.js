@@ -1,42 +1,54 @@
-// ✅ 회원정보 수정 API 연결
-const API_BASE_URL = "http://127.0.0.1:8000"; // Django 서버 주소
+document.addEventListener("DOMContentLoaded", async function () {
+  const token = localStorage.getItem("token");
+  if (!token) return alert("로그인이 필요합니다.");
 
-document.addEventListener("DOMContentLoaded", function () {
-  const editForm = document.querySelector(".edit-form");
+  try {
+    // 1. 유저 정보 불러오기
+    const response = await fetch("http://127.0.0.1:8000/users/profile/", {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    });
 
-  editForm.addEventListener("submit", async function (e) {
+    const data = await response.json();
+
+    // 2. 값 채워넣기
+    document.getElementById("name").value = data.first_name || "";
+    document.getElementById("email").value = data.email || "";
+    document.getElementById("birthdate").value = data.birthdate || "";
+    document.getElementById("region").value = data.region || "";
+    document.getElementById("crops").value = data.crops || "";
+    document.getElementById("equipment").value = data.equipment || "";
+  } catch (err) {
+    console.error("유저 정보 조회 실패:", err);
+    alert("정보를 불러오는데 실패했습니다.");
+  }
+
+  // 3. 저장 버튼 눌렀을 때
+  const form = document.querySelector(".edit-form");
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    // 입력값 가져오기
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
+    const first_name = document.getElementById("name").value.trim(); // ✅ 핵심
+    const email = document.getElementById("email").value.trim();
     const birthdate = document.getElementById("birthdate").value;
     const region = document.getElementById("region").value;
     const crops = document.getElementById("crops").value;
     const equipment = document.getElementById("equipment").value;
 
-    // 입력값 검증
-    if (!name || !email || !birthdate || !region) {
-      alert("필수 항목을 모두 입력해주세요.");
-      return;
-    }
-
-    // 이메일 유효성 검사
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      alert("유효한 이메일을 입력해주세요.");
-      return;
+    if (!first_name || !email || !birthdate || !region) {
+      return alert("필수 항목을 모두 입력해주세요.");
     }
 
     try {
-      const token = localStorage.getItem("token"); // 저장된 토큰 사용
-      const response = await fetch(`${API_BASE_URL}/users/update/`, {
+      const response = await fetch("http://127.0.0.1:8000/users/update/", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Token ${token}`,
         },
         body: JSON.stringify({
-          username: name, // username을 name으로 대체 (원하는 필드에 맞게 수정 가능)
+          first_name,
           email,
           profile: {
             birthdate,
@@ -47,20 +59,25 @@ document.addEventListener("DOMContentLoaded", function () {
         }),
       });
 
-      const data = await response.json();
-
-      console.log("응답 데이터:", data);
-
       if (response.ok) {
-        alert("회원정보가 성공적으로 저장되었습니다.");
-        window.location.href = "./mypage.html"; // 마이페이지로 이동
+        alert("회원 정보가 성공적으로 수정되었습니다.");
+        window.location.href = "mypage.html";
       } else {
-        alert(data.message || "회원정보 수정에 실패했습니다.");
-        console.error(data);
+        const error = await response.json();
+        console.error("수정 실패:", error);
+        alert("회원 정보 수정에 실패했습니다.");
       }
-    } catch (error) {
-      console.error("에러:", error);
+    } catch (err) {
+      console.error("에러 발생:", err);
       alert("서버 오류가 발생했습니다.");
     }
   });
 });
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", function (e) {
+    e.preventDefault(); // a 태그의 기본 이동 막기
+    localStorage.removeItem("token"); // 토큰 삭제
+    alert("로그아웃 되었습니다.");
+    window.location.href = "index.html"; // 홈으로 이동하거나 새로고침
+  });
+}

@@ -123,3 +123,38 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+document.addEventListener("DOMContentLoaded", async function () {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/users/profile/", {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    });
+
+    const data = await response.json();
+    console.log("유저 데이터:", data); // ✅ 확인용
+
+    // 화면에 데이터 넣기
+    document.querySelectorAll(".info-value").forEach((element) => {
+      const field = element.dataset.field;
+      if (data[field]) {
+        element.textContent = data[field]; // ✅ 첫 화면에 표시
+      }
+    });
+  } catch (err) {
+    console.error("유저 정보 불러오기 오류:", err);
+  }
+});
+document.addEventListener("DOMContentLoaded", function () {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    document.querySelector(".login-btn")?.style.display = "none";
+    document.querySelector(".signup-btn")?.style.display = "none";
+    document.querySelector(".profile-btn")?.style.display = "inline-block";
+    document.querySelector(".logout-btn")?.style.display = "inline-block";
+  }
+});
