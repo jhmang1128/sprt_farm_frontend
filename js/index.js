@@ -53,7 +53,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//// 네비게이션 바 header는 다른의미로 쓰여서 바꾸는게 좋을 것 같긴 함
+//// header - nav
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
@@ -108,15 +108,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // serach bar - button action
 document.getElementById("search_button_01").addEventListener("click", function () {
-  console.log("hihi")
-  console.log(document.getElementById("input_search_text"))
-  const text_search_value = document.getElementById("input_search_text").value;
+  console.log(document.getElementById("input_text_search"))
+  const text_search_value = document.getElementById("input_text_search").value;
   
 
   if (text_search_value) {
     sessionStorage.setItem("text_search_value", text_search_value);
     window.location.href = "2번째.html";
-    console.log("hihi")
   }
   else {
     console.log("error : 값이 없습니다.")
