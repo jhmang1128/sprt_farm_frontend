@@ -31,7 +31,7 @@ const url_get_soil_info = url_base_django + 'chatbot/soildata/';
 const url_get_recommended_crop = url_base_django + 'chatbot/recommendation/';
 
 
-// PNU 코드 및 좌표 값 추출
+// PNU 코드 및 좌표 값 추출 ✅
 const type_parcel = 'PARCEL'
 const url_qs_address = `${url_get_address}?address=${text_search_value}&type=${type_parcel}`;
 
