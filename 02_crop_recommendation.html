@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko">
+
+  <!--===================================================================================================-->
+  <!-- head -->  
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>들어와라, 내땅에 - 토양 분석</title>
-    <link rel="stylesheet" href="css/2번째.css" />
+    <link rel="stylesheet" href="css/02_crop_recommendation.css" />
   </head>
+
+  <!--===================================================================================================-->
+  <!-- body -->
   <body>
     <div class="container">
+
+      <!------------------------------------------------------------------------------------------------------->
       <!-- Header -->
       <header class="header">
         <div class="logo-container">
           <div class="logo">
+            <!-- error ERR_NAME_NOT_RESOLVED -->
             <img
               src="https://via.placeholder.com/40/16a34a/ffffff?text=🌱"
               alt="Logo"
@@ -30,8 +39,10 @@
         </div>
       </header>
 
+      <!------------------------------------------------------------------------------------------------------->
       <!-- Main Content -->
       <main class="main-content">
+
         <!-- Background Curves -->
         <div class="background-curves">
           <div class="curve-top"></div>
@@ -40,7 +51,7 @@
         </div>
 
         <!-- Location Info -->
-        <div class="location-info">
+        <div id="text_box_01" class="location-info">
           전북특별자치도 순창군 풍산면 아미로 379의 토양화학성
         </div>
 
@@ -117,6 +128,8 @@
       </main>
     </div>
 
-    <script src="script.js"></script>
+    <!--===================================================================================================-->
+    <!-- script -->
+    <script src="js/02_crop_recommendation.js"></script>
   </body>
 </html>

@@ -1,3 +1,109 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//// header
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const url_base_django = 'http://127.0.0.1:8000/'
+
+////////////////////////////////////////////////////////////
+// nav
+////////////////////////////////////////////////////////////
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//// body
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+// Location Info
+////////////////////////////////////////////////////////////
+
+// text_box
+const text_box_01 = document.getElementById('text_box_01');
+const text_search_value = sessionStorage.getItem('text_search_value');
+text_box_01.textContent = text_search_value;
+
+
+// url
+const url_get_address = url_base_django + 'chatbot/address/';
+const url_get_soil_info = url_base_django + 'chatbot/soildata/';
+const url_get_recommended_crop = url_base_django + 'chatbot/recommendation/';
+
+
+// PNU 코드 및 좌표 값 추출
+const type_parcel = 'PARCEL'
+const url_qs_address = `${url_get_address}?address=${text_search_value}&type=${type_parcel}`;
+
+
+async function fetchData() {
+  try {
+    const response = await fetch(url_qs_address);
+    const response_data = await response.json();
+    
+    const PNU_code = response_data["address_information"]["id"];
+    const address = response_data["address_information"]["address"]["parcel"];
+    // const address = response_data["address_information"]["address"]["road"];
+    const x = response_data["address_information"]["point"]["x"];
+    const y = response_data["address_information"]["point"]["y"];
+
+    
+    
+    // 작물 재배 토양 환경 정보
+    const url_qs_soil = `${url_get_soil_info}?PNU_Code=${PNU_code}`;
+    console.log(url_qs_soil);
+
+
+    // 작물 추천
+    const url_qs_rec_crop = `${url_get_recommended_crop}?PNU_Code=${PNU_code}`;
+    console.log(url_qs_rec_crop);
+
+    
+    // return response_data;
+
+    ////////////////////////////////////////////////////////////
+    // Soil Analysis Table
+    ////////////////////////////////////////////////////////////
+
+  } catch (err) {
+    console.log('error', err);
+  }
+}
+fetchData();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// console.log(JSON.parse(response_address));
+// console.log(response_address);
+// console.log(response_address.json());
+
+
+// const data = response_address['address_information'];
+// console.log(data);
+
+// const data_02 = response_address.json();
+// console.log(data_02);
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//// etc
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 document.addEventListener("DOMContentLoaded", function () {
   // Initialize the application
   initApp();
