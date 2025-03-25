@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // search box
 ////////////////////////////////////////////////////////////
 
-// serach bar - button action
+// serach bar - button action ✅
 document.getElementById('search_button_01').addEventListener('click', function () {
   console.log(document.getElementById('input_text_search'));
   const text_search_value = document.getElementById('input_text_search').value;

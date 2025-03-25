@@ -49,12 +49,28 @@ async function fetchData() {
 
     
     
-    // 작물 재배 토양 환경 정보
+    // 작물 재배 토양 환경 정보 ⛔
     const url_qs_soil = `${url_get_soil_info}?PNU_Code=${PNU_code}`;
     console.log(url_qs_soil);
 
 
-    // 작물 추천
+    // "BJD_Code": "법정동코드",
+    // "PNU_Code": "지번코드",
+    // "Any_Year": "시료채취년도",
+    // "Exam_Day": "토양검정일",
+    // "Exam_Type": "경지구분코드",
+    // "PNU_Nm": "대상지 지번주소",
+    // "ACID": "산도",
+    // "VLDPHA": "유효인산",
+    // "VLDSIA": "유효규산",
+    // "OM": "유기물",
+    // "POSIFERT_MG": "마그네슘",
+    // "POSIFERT_K": "칼륨",
+    // "POSIFERT_CA": "칼슘",
+    // "SELC": "전기전도도"
+
+
+    // 작물 추천 ⛔
     const url_qs_rec_crop = `${url_get_recommended_crop}?PNU_Code=${PNU_code}`;
     console.log(url_qs_rec_crop);
 
