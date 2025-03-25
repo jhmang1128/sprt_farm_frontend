@@ -1,12 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("✅ index.js 로딩됨");
+
+  // 버튼/입력창 선택
   const loginBtn = document.querySelector(".login-btn");
   const signupBtn = document.querySelector(".signup-btn");
   const profileBtn = document.querySelector(".profile-btn");
   const logoutBtn = document.querySelector(".logout-btn");
+  const fetchButton = document.querySelector(".search-button");
+  const addressInput = document.querySelector(".search-input");
 
   const token = localStorage.getItem("token");
 
-  // ✅ 로그인 상태일 경우 버튼 전환
+  // ✅ 로그인 상태면 버튼 전환
   if (token) {
     if (loginBtn) loginBtn.style.display = "none";
     if (signupBtn) signupBtn.style.display = "none";
@@ -14,49 +19,72 @@ document.addEventListener("DOMContentLoaded", function () {
     if (logoutBtn) logoutBtn.style.display = "inline-block";
   }
 
-  // ✅ 로그아웃 버튼 기능
+  // ✅ 로그아웃 버튼 클릭
   if (logoutBtn) {
     logoutBtn.addEventListener("click", function (e) {
-      e.preventDefault(); // a 태그의 기본 이동 막기
-      localStorage.removeItem("token"); // 토큰 삭제
+      e.preventDefault();
+      localStorage.removeItem("token");
       alert("로그아웃 되었습니다.");
-      window.location.href = "index.html"; // 홈으로 이동하거나 새로고침
+      window.location.href = "index.html";
     });
   }
 
-  // ✅ 주소 검색 기능 (있는 경우만)
-  const addressInput = document.getElementById("address-input");
-  const resultDiv = document.getElementById("result");
-  const fetchButton = document.getElementById("fetch-button");
+  // ✅ 검색 버튼 클릭 이벤트
+  if (fetchButton && addressInput) {
+    console.log("✅ 검색 버튼 이벤트 등록됨");
 
-  if (fetchButton) {
     fetchButton.addEventListener("click", function () {
-      const address = addressInput.value;
+      const address = addressInput.value.trim();
       if (!address) {
         alert("주소를 입력하세요.");
         return;
       }
 
-      fetch(`/api/soil_recommendation?address=${encodeURIComponent(address)}`)
-        .then((response) => response.json())
+      console.log("📡 주소 검색 시작:", address);
+
+      // 1. 주소 정보 요청
+      fetch(
+        `http://localhost:8000/chatbot/address/?address=${encodeURIComponent(
+          address
+        )}&type=PARCEL`
+      )
+        .then((res) => res.json())
         .then((data) => {
-          if (data.error) {
-            resultDiv.innerHTML = `<p style="color: red;">오류: ${data.error}</p>`;
-          } else {
-            resultDiv.innerHTML = "<h3>추천 작물</h3>";
-            data.recommendations.forEach((crop) => {
-              resultDiv.innerHTML += `
-                <div>
-                  <h4>${crop.crop}</h4>
-                  <p>추천 이유: ${crop.reason}</p>
-                </div>
-              `;
-            });
+          if (!data.address_information) {
+            alert("주소 정보를 불러올 수 없습니다.");
+            return;
           }
+
+          const pnu = data.address_information.id;
+          console.log("📦 받은 PNU 코드:", pnu);
+
+          // 2. 추천 작물 요청
+          return fetch(
+            `http://localhost:8000/chatbot/recommendation/?address_information[id]=${pnu}`
+          );
         })
-        .catch((error) => {
-          resultDiv.innerHTML = `<p style="color: red;">에러 발생: ${error.message}</p>`;
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.recommendations || data.recommendations.length === 0) {
+            alert("추천 작물을 찾을 수 없습니다.");
+            return;
+          }
+
+          console.log("🌱 추천 결과:", data.recommendations);
+
+          // 3. 결과 저장 후 이동
+          localStorage.setItem(
+            "recommendations",
+            JSON.stringify(data.recommendations)
+          );
+          window.location.href = "2번째.html";
+        })
+        .catch((err) => {
+          console.error("❌ 서버 에러:", err);
+          alert("서버 오류가 발생했습니다.");
         });
     });
+  } else {
+    console.warn("❌ 버튼 또는 입력창을 찾을 수 없습니다.");
   }
 });

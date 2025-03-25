@@ -1,0 +1,109 @@
+<!-- ✅ index.html (정리된 버전) -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>들어와라, 내땅에 - 주소검색</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo-container">
+        <img src="image/logo.png" alt="로고" class="logo-image" />
+        <div>
+          <h1 class="site-title">들어와라, 내땅에</h1>
+          <p class="site-subtitle">comeon, my ground</p>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <a href="post_main.html" class="nav-button">문의</a>
+        <a
+          href="mypage.html"
+          class="nav-button profile-btn"
+          style="display: none"
+          >내 정보</a
+        >
+        <a href="#" class="nav-button logout-btn" style="display: none"
+          >로그아웃</a
+        >
+        <a href="login.html" class="nav-button login-btn">로그인</a>
+        <a href="signup.html" class="nav-button signup-btn">회원가입</a>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="background"></div>
+      <div class="search-container">
+        <img src="image/무제-2.png" alt="로고" class="logo-image" />
+
+        <div class="search-box">
+          <!-- Search Bar -->
+          <div class="search-bar">
+            <div class="search-type">
+              <select class="search-type-select">
+                <option>도로명/지번</option>
+                <option>지번</option>
+                <option>도로명</option>
+              </select>
+            </div>
+            <input
+              type="text"
+              class="search-input"
+              id="address-input"
+              placeholder="지번 예시 : 경북특별자치도 은하군 홍길동 특정리 555"
+            />
+            <button type="button" class="search-button" id="fetch-button">
+              검색
+            </button>
+          </div>
+
+          <!-- Filter Options -->
+          <div class="filter-options">
+            <select class="filter-select">
+              <option>제조</option>
+              <option>옵션 2</option>
+            </select>
+            <select class="filter-select">
+              <option>검지</option>
+              <option>옵션 2</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-logo">
+          <div class="logo">
+            <div class="logo-inner"></div>
+          </div>
+          <h1 class="site-title">들어와라, 내땅에</h1>
+          <span class="site-subtitle">community ground</span>
+        </div>
+
+        <div class="footer-links">
+          <span class="tech-support">기술 문의</span>
+          <div class="social-icons">
+            <!-- SNS 아이콘 생략 가능 -->
+          </div>
+        </div>
+
+        <div class="company-info">
+          <div>회사정보 내용</div>
+          <div>copyright@info.com</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/index.js"></script>
+  </body>
+</html>

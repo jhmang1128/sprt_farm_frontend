@@ -1,160 +1,78 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Edit button functionality
-  const editButton = document.querySelector(".edit-button");
+  const loginBtn = document.querySelector(".login-btn");
+  const signupBtn = document.querySelector(".signup-btn");
+  const profileBtn = document.querySelector(".profile-btn");
+  const logoutBtn = document.querySelector(".logout-btn");
+  const fetchButton = document.querySelector(".search-button");
+  const addressInput = document.querySelector(".search-input");
 
-  editButton.addEventListener("click", function () {
-    // In a real application, this would open an edit form
-    // For demo purposes, we'll just toggle between view and edit modes
-    toggleEditMode();
-  });
-
-  // Delete account button functionality
-
-  // Navigation button handling
-  const navButtons = document.querySelectorAll(".nav-button");
-
-  navButtons.forEach((button) => {
-    button.addEventListener("click", function (e) {
-      if (this.textContent.trim() === "로그아웃") {
-        e.preventDefault();
-        alert("로그아웃 되었습니다.");
-        // In a real application, this would log the user out
-      }
-    });
-  });
-
-  // Navigation link handling
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const linkText = this.textContent.trim();
-      alert(`${linkText} 페이지로 이동합니다.`);
-      // In a real application, this would navigate to the respective page
-    });
-  });
-});
-
-// Function to toggle between view and edit modes
-function toggleEditMode() {
-  const infoValues = document.querySelectorAll(".info-value");
-  const editButton = document.querySelector(".edit-button");
-
-  const isEditMode = editButton.textContent === "저장";
-
-  if (isEditMode) {
-    // ✅ 수정 저장 모드 → API 요청 보내기
-    const updatedData = {};
-
-    infoValues.forEach((value) => {
-      const input = value.querySelector("input");
-      if (input) {
-        const field = input.dataset.field;
-        updatedData[field] = input.value;
-        value.textContent = input.value; // UI 업데이트
-      }
-    });
-
-    const token = localStorage.getItem("token");
-
-    fetch("http://127.0.0.1:8000/users/update/", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-      body: JSON.stringify(updatedData),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("수정 실패");
-        return res.json();
-      })
-      .then((data) => {
-        alert("정보가 성공적으로 저장되었습니다.");
-        editButton.textContent = "수정";
-      })
-      .catch((err) => {
-        alert("저장에 실패했습니다.");
-        console.error(err);
-      });
-  } else {
-    // ✅ 편집 모드 전환
-    infoValues.forEach((value) => {
-      const currentValue = value.textContent;
-      const field = value.dataset.field; // HTML에 data-field 있어야 함
-      value.innerHTML = `<input type="text" class="edit-input" value="${currentValue}" data-field="${field}">`;
-    });
-
-    editButton.textContent = "저장";
-  }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  const deleteButton = document.querySelector(".delete-button");
-
-  deleteButton.addEventListener("click", async function () {
-    const confirmDelete = confirm("정말로 회원탈퇴를 진행하시겠습니까?");
-
-    if (!confirmDelete) return;
-
-    const token = localStorage.getItem("token");
-    if (!token) return alert("로그인이 필요합니다.");
-
-    try {
-      const response = await fetch("http://127.0.0.1:8000/users/delete/", {
-        method: "DELETE",
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        alert("회원탈퇴가 완료되었습니다.");
-        localStorage.removeItem("token");
-        window.location.href = "index.html"; // 홈으로 이동
-      } else {
-        const errorData = await response.json();
-        alert("회원탈퇴 실패: " + (errorData.message || "서버 오류"));
-      }
-    } catch (err) {
-      console.error("회원탈퇴 오류:", err);
-      alert("서버와 통신 중 문제가 발생했습니다.");
-    }
-  });
-});
-document.addEventListener("DOMContentLoaded", async function () {
-  const token = localStorage.getItem("token");
-  if (!token) return;
-
-  try {
-    const response = await fetch("http://127.0.0.1:8000/users/profile/", {
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    });
-
-    const data = await response.json();
-    console.log("유저 데이터:", data); // ✅ 확인용
-
-    // 화면에 데이터 넣기
-    document.querySelectorAll(".info-value").forEach((element) => {
-      const field = element.dataset.field;
-      if (data[field]) {
-        element.textContent = data[field]; // ✅ 첫 화면에 표시
-      }
-    });
-  } catch (err) {
-    console.error("유저 정보 불러오기 오류:", err);
-  }
-});
-document.addEventListener("DOMContentLoaded", function () {
   const token = localStorage.getItem("token");
 
+  // ✅ 로그인 상태일 경우 버튼 전환
   if (token) {
-    document.querySelector(".login-btn")?.style.display = "none";
-    document.querySelector(".signup-btn")?.style.display = "none";
-    document.querySelector(".profile-btn")?.style.display = "inline-block";
-    document.querySelector(".logout-btn")?.style.display = "inline-block";
+    if (loginBtn) loginBtn.style.display = "none";
+    if (signupBtn) signupBtn.style.display = "none";
+    if (profileBtn) profileBtn.style.display = "inline-block";
+    if (logoutBtn) logoutBtn.style.display = "inline-block";
+  }
+
+  // ✅ 로그아웃 버튼 기능
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", function (e) {
+      e.preventDefault(); // a 태그의 기본 이동 막기
+      localStorage.removeItem("token"); // 토큰 삭제
+      alert("로그아웃 되었습니다.");
+      window.location.href = "index.html"; // 홈으로 이동하거나 새로고침
+    });
+  }
+
+  // ✅ 주소 검색 기능
+  if (fetchButton && addressInput) {
+    fetchButton.addEventListener("click", function () {
+      const address = addressInput.value.trim();
+      if (!address) {
+        alert("주소를 입력하세요.");
+        return;
+      }
+
+      // ✅ 1. 주소 정보 요청 (DRF API)
+      fetch(
+        `http://localhost:8000/chatbot/address/?address=${encodeURIComponent(
+          address
+        )}&type=PARCEL`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.address_information) {
+            alert("주소 정보를 불러올 수 없습니다.");
+            return;
+          }
+
+          const pnu = data.address_information.id;
+
+          // ✅ 2. 추천 작물 요청 (DRF API)
+          return fetch(
+            `http://localhost:8000/chatbot/recommendation/?address_information[id]=${pnu}`
+          );
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.recommendations) {
+            alert("추천 작물을 찾을 수 없습니다.");
+            return;
+          }
+
+          // ✅ 3. 결과 저장 후 페이지 이동
+          localStorage.setItem(
+            "recommendations",
+            JSON.stringify(data.recommendations)
+          );
+          window.location.href = "2번째.html";
+        })
+        .catch((err) => {
+          console.error("❌ 에러 발생:", err);
+          alert("서버 오류가 발생했습니다.");
+        });
+    });
   }
 });

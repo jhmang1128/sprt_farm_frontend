@@ -288,3 +288,18 @@ body {
     border-bottom: none;
   }
 }
+.dropdown-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.dropdown-container label {
+  font-weight: bold;
+}
+
+select {
+  padding: 6px 10px;
+  font-size: 1rem;
+}
