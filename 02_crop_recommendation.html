@@ -43,7 +43,7 @@
 
         <!-- Location Info -->
         <div id="text_box_01" class="location-info">
-          전북특별자치도 순창군 풍산면 아미로 379의 토양화학성
+          검색에 사용된 주소 string 값
         </div>
 
         <!-- Soil Analysis Table -->
@@ -51,26 +51,43 @@
           <table class="soil-table">
             <thead>
               <tr>
-                <th>N (질소)</th>
-                <th>P (인산)</th>
-                <th>K (칼륨)</th>
-                <th>Ca (칼슘)</th>
-                <th>Mg (마그네슘)</th>
-                <th>Fe (철)</th>
-                <th>Mn (망간)</th>
-                <th>Zn (아연)</th>
+                <th>지번코드</th>
+                <th>토양검정일</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>1</td>
-                <td>0.1~2.5</td>
-                <td>5</td>
-                <td>2.6</td>
-                <td>1.1</td>
-                <td>0.3</td>
-                <td>0.6</td>
-                <td>8</td>
+                <td id="sn_01">None</td>
+                <td id="sn_02">None</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="soil-table-container">
+          <table class="soil-table">
+            <thead>
+              <tr>
+                <th>pH 1:5</th>
+                <th>유기물(g/kg)</th>
+                <th>인산 (mg/kg)</th>
+                <th>칼륨 (cmol+/kg)</th>
+                <th>칼슘 (cmol+/kg)</th>
+                <th>마그네슘 (cmol+/kg)</th>
+                <th>전기도도 (dS/m)</th>
+                <th>규산 (mg/kg)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="sn_03">None</td>
+                <td id="sn_04">None</td>
+                <td id="sn_05">None</td>
+                <td id="sn_06">None</td>
+                <td id="sn_07">None</td>
+                <td id="sn_08">None</td>
+                <td id="sn_09">None</td>
+                <td id="sn_10">None</td>
               </tr>
             </tbody>
           </table>
@@ -79,17 +96,17 @@
         <!-- Crop Buttons -->
         <div class="crop-buttons-container">
           <div class="crop-row">
-            <button class="crop-btn" data-crop="potato">감자</button>
+            <button id="btn_crop_01" class="crop-btn" data-crop="potato">추천 작물 1</button>
             <!-- text box 추가 -->
           </div>
 
           <div class="crop-row">
-            <button class="crop-btn" data-crop="ginger">생강</button>
+            <button id="btn_crop_02" class="crop-btn" data-crop="ginger">추천 작물 2</button>
             <!-- text box 추가 -->
           </div>
 
           <div class="crop-row">
-            <button class="crop-btn" data-crop="garlic">마늘</button>
+            <button id="btn_crop_03" class="crop-btn" data-crop="garlic">추천 작물 3</button>
             <!-- text box 추가 -->
           </div>
         </div>
