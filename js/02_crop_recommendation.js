@@ -2,7 +2,6 @@
 //// header
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const url_base_django = 'http://127.0.0.1:8000/'
 
 ////////////////////////////////////////////////////////////
 // nav
@@ -17,72 +16,106 @@ const url_base_django = 'http://127.0.0.1:8000/'
 ////////////////////////////////////////////////////////////
 
 // text_box
-const text_box_01 = document.getElementById('text_box_01');
-const text_search_value = sessionStorage.getItem('text_search_value');
-text_box_01.textContent = text_search_value;
+const text_search_address = sessionStorage.getItem('text_search_value');
+document.getElementById('text_box_01').textContent = text_search_address;
 
+////////////////////////////////////////////////////////////
+// Soil Analysis Table
+////////////////////////////////////////////////////////////
 
 // url
-const url_get_address = url_base_django + 'chatbot/address/';
-const url_get_soil_info = url_base_django + 'chatbot/soildata/';
-const url_get_recommended_crop = url_base_django + 'chatbot/recommendation/';
+const url_base_django = 'http://127.0.0.1:8000/';
+const url_base_chatbot = 'http://127.0.0.1:8000/chatbot/';
+
+const url_get_address = url_base_chatbot + 'address/';
+const url_qs_add_to_soil = url_base_chatbot + 'add_to_soil/';
+const url_qs_add_to_crop = url_base_chatbot + 'add_to_crop/';
 
 
 // PNU 코드 및 좌표 값 추출 ✅
-const type_parcel = 'PARCEL'
-const url_qs_address = `${url_get_address}?address=${text_search_value}&type=${type_parcel}`;
+const type_parcel = 'PARCEL';
+const url_qs_address = `${url_get_address}?address=${text_search_address}&type=${type_parcel}`;
 
 
-async function fetchData() {
+
+// 작물 재배 토양 환경 정보 ✅
+const url_qs_soil = `${url_qs_add_to_soil}?address=${text_search_address}&type=${type_parcel}`;
+console.log(url_qs_soil);
+
+async function get_soil_info() {
   try {
-    const response = await fetch(url_qs_address);
-    const response_data = await response.json();
+    const res_soil = await fetch(url_qs_soil);
+    const json_soil = await res_soil.json();
     
-    const PNU_code = response_data["address_information"]["id"];
-    const address = response_data["address_information"]["address"]["parcel"];
-    // const address = response_data["address_information"]["address"]["road"];
-    const x = response_data["address_information"]["point"]["x"];
-    const y = response_data["address_information"]["point"]["y"];
+    // 토양 영양 테이블 값
+    document.getElementById('sn_01').textContent = json_soil["soil_data"]["PNU_Code"];
+    document.getElementById('sn_02').textContent = json_soil["soil_data"]["Exam_Day"];
+    document.getElementById('sn_03').textContent = json_soil["soil_data"]["ACID"];
+    document.getElementById('sn_04').textContent = json_soil["soil_data"]["OM"];
+    document.getElementById('sn_05').textContent = json_soil["soil_data"]["VLDPHA"];
+    document.getElementById('sn_06').textContent = json_soil["soil_data"]["POSIFERT_K"];
+    document.getElementById('sn_07').textContent = json_soil["soil_data"]["POSIFERT_CA"];
+    document.getElementById('sn_08').textContent = json_soil["soil_data"]["POSIFERT_MG"];
+    document.getElementById('sn_09').textContent = json_soil["soil_data"]["SELC"];
+    document.getElementById('sn_10').textContent = json_soil["soil_data"]["VLDSIA"];
 
-    
-    
-    // 작물 재배 토양 환경 정보 ⛔
-    const url_qs_soil = `${url_get_soil_info}?PNU_Code=${PNU_code}`;
-    console.log(url_qs_soil);
-
-
-    // "BJD_Code": "법정동코드",
-    // "PNU_Code": "지번코드",
-    // "Any_Year": "시료채취년도",
-    // "Exam_Day": "토양검정일",
-    // "Exam_Type": "경지구분코드",
-    // "PNU_Nm": "대상지 지번주소",
-    // "ACID": "산도",
-    // "VLDPHA": "유효인산",
-    // "VLDSIA": "유효규산",
-    // "OM": "유기물",
-    // "POSIFERT_MG": "마그네슘",
-    // "POSIFERT_K": "칼륨",
-    // "POSIFERT_CA": "칼슘",
-    // "SELC": "전기전도도"
-
-
-    // 작물 추천 ⛔
-    const url_qs_rec_crop = `${url_get_recommended_crop}?PNU_Code=${PNU_code}`;
-    console.log(url_qs_rec_crop);
-
-    
-    // return response_data;
-
-    ////////////////////////////////////////////////////////////
-    // Soil Analysis Table
-    ////////////////////////////////////////////////////////////
 
   } catch (err) {
     console.log('error', err);
   }
 }
-fetchData();
+get_soil_info();
+
+
+// 작물 추천 ✅
+const url_qs_crop = `${url_qs_add_to_crop}?address=${text_search_address}&type=${type_parcel}`;
+console.log(url_qs_crop);
+
+async function get_crop() {
+  try {
+    const res_crop = await fetch(url_qs_crop);
+    const json_crop = await res_crop.json();
+
+    console.log(json_crop);
+    console.log(json_crop["recommendations"][0]);
+    console.log(json_crop["recommendations"][0]["crop"]);
+
+    try {
+      document.getElementById('btn_crop_01').textContent = json_crop["recommendations"][0]["crop"];
+      document.getElementById('p_crop_01').textContent = json_crop["recommendations"][0]["reason"];
+    } catch (err) {
+      document.getElementById('btn_crop_01').textContent = "";
+      document.getElementById('p_crop_01').textContent = "추천된 작물이 없습니다.";
+      console.log('error : crop 01 :', err);
+    }
+
+    try {
+      document.getElementById('btn_crop_02').textContent = json_crop["recommendations"][1]["crop"];
+      document.getElementById('p_crop_02').textContent = json_crop["recommendations"][1]["reason"];
+    } catch (err) {
+      document.getElementById('btn_crop_02').textContent = "";
+      document.getElementById('p_crop_02').textContent = "";
+      console.log('error : crop 02 :', err);
+    }
+    
+    try {
+      document.getElementById('btn_crop_03').textContent = json_crop["recommendations"][2]["crop"];
+      document.getElementById('p_crop_03').textContent = json_crop["recommendations"][2]["reason"];
+    } catch (err) {
+      document.getElementById('btn_crop_03').textContent = "";
+      document.getElementById('p_crop_03').textContent = "";
+      console.log('error : crop 03 :', err);
+    }
+
+
+  } catch (err) {
+    console.log('error', err);
+  }
+}
+get_crop();
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //// 김요한
