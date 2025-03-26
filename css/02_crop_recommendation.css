@@ -85,3 +85,315 @@ h2 {
 #go-to-analysis:hover {
   background-color: #15803d;
 }
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Page Title */
+.page-title {
+  text-align: right;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.site-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.site-subtitle {
+  font-size: 12px;
+  color: #6b7280;
+  display: block;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nav-btn.inquiry {
+  color: #333;
+  background-color: transparent;
+}
+
+.nav-btn.my-info {
+  color: white;
+  background-color: #0a6e1f;
+  border: none;
+}
+
+.nav-btn.logout {
+  color: #333;
+  background-color: transparent;
+  border: 1px solid #ccc;
+}
+
+/* Main Content Styles */
+.main-content {
+  padding: 30px 20px;
+  position: relative;
+}
+
+/* Background Curves */
+.background-curves {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.curve-top {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: transparent;
+  border-bottom: 2px solid #000;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+.curve-bottom {
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: transparent;
+  border-top: 2px solid #000;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+.red-curve {
+  position: absolute;
+  top: 150px;
+  left: 0;
+  width: 30%;
+  height: 100px;
+  background: transparent;
+  border-bottom: 2px solid #ff0000;
+  border-radius: 0 0 80% 0 / 0 0 100% 0;
+}
+
+/* Analysis Section */
+.analysis-section {
+  margin-bottom: 40px;
+}
+
+.analysis-title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+/* Soil Analysis Table */
+.soil-table-container {
+  margin-bottom: 20px;
+}
+
+.soil-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+.soil-table th {
+  background-color: #0a6e1f;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  font-weight: normal;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.soil-table td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.soil-table td.highlight {
+  color: #ff0000;
+}
+
+/* Calendar Section */
+.calendar-section {
+  margin-top: 60px;
+}
+
+.calendar-title {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.crop-calendar {
+  border: 1px solid #ddd;
+}
+
+.months-row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ddd;
+}
+
+.month {
+  padding: 8px 4px;
+  text-align: center;
+  border-right: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.month:last-child {
+  border-right: none;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+}
+
+.calendar-cell {
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 5px;
+  min-height: 40px;
+  position: relative;
+}
+
+.calendar-cell:nth-child(12n) {
+  border-right: none;
+}
+
+.calendar-cell:nth-last-child(-n + 12) {
+  border-bottom: none;
+}
+
+.cell-content {
+  font-size: 12px;
+  word-break: keep-all;
+  overflow: hidden;
+}
+
+/* Progress Bar */
+.progress-bar {
+  height: 5px;
+  background-color: #8bc34a;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .months-row,
+  .calendar-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .calendar-grid {
+    grid-template-rows: repeat(12, 1fr);
+  }
+
+  .calendar-cell:nth-child(6n) {
+    border-right: none;
+  }
+
+  .calendar-cell:nth-child(12n) {
+    border-right: 1px solid #ddd;
+  }
+
+  .calendar-cell:nth-last-child(-n + 6) {
+    border-bottom: none;
+  }
+}
+.dropdown-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.dropdown-container label {
+  font-weight: bold;
+}
+
+select {
+  padding: 6px 10px;
+  font-size: 1rem;
+}
+iframe {
+  width: 100%; /* 필요에 따라 크기 조정 */
+  height: 2000px; /* 필요에 따라 크기 조정 */
+  border: none;
+}
