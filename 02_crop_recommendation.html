@@ -22,7 +22,7 @@
           <div class="logo">
             <!-- error ERR_NAME_NOT_RESOLVED -->
             <img
-              src="https://via.placeholder.com/40/16a34a/ffffff?text=🌱"
+              src="image/logo.png"
               alt="Logo"
             />
           </div>
@@ -114,10 +114,28 @@
       </main>
     </div>
 
-    <!-- 다음 페이지로 이동 버튼 -->
-    <div class="next-step-button">
-      <button id="go-to-analysis">작물 분석 페이지로 이동</button>
+    <!-- 작물 선택 -->
+    <div class="dropdown-group">
+      <label for="category-select">대분류:</label>
+      <select id="category-select">
+        <option value="">-- 대분류 선택 --</option>
+      </select>
+    
+      <label for="crop-select">작물 선택:</label>
+      <select id="crop-select" disabled>
+        <option value="">-- 대분류 먼저 선택 --</option>
+      </select>
+    
+      <button id="loadCropData">정보 보기</button>
     </div>
+    
+    <!-- 페이지 로드 -->
+    <iframe
+      id="crop-info-frame"
+      width="1150"
+      height="2000"
+      style="border: none; margin-top: 20px;"
+    ></iframe>
 
     <!--===================================================================================================-->
     <!-- script -->
