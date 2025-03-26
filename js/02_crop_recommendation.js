@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 작물 재배 토양 환경 정보 ✅
   const url_qs_soil = `${url_qs_add_to_soil}?address=${text_search_address}&type=${type_parcel}`;
-  console.log(url_qs_soil);
 
   async function get_soil_info() {
     try {
@@ -76,16 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 작물 추천 ✅
   const url_qs_crop = `${url_qs_add_to_crop}?address=${text_search_address}&type=${type_parcel}`;
-  console.log(url_qs_crop);
 
   async function get_crop() {
     try {
       const res_crop = await fetch(url_qs_crop);
       const json_crop = await res_crop.json();
-
-      console.log('////////////////////////////////////////////////////////////////////////');
-      console.log(json_crop);
-      console.log('////////////////////////////////////////////////////////////////////////');
 
       try {
         document.getElementById('btn_crop_01').textContent = json_crop["recommendations"][0]["crop"];
