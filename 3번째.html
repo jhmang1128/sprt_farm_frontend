@@ -104,10 +104,25 @@
             </table>
           </div>
         </section>
+        <div class="dropdown-group">
+          <label for="category-select">대분류:</label>
+          <select id="category-select">
+            <option value="">-- 대분류 선택 --</option>
+          </select>
+        
+          <label for="crop-select">작물 선택:</label>
+          <select id="crop-select" disabled>
+            <option value="">-- 대분류 먼저 선택 --</option>
+          </select>
+        
+          <button id="loadCropData">정보 보기</button>
+        </div>
+        
         <iframe
-          src="https://www.nongsaro.go.kr/portal/ps/psb/psbl/workScheduleDtl.ps?menuId=PS00087&cntntsNo=30699&sKidofcomdtySeCode=FC01"
-          width="1000"
+          id="crop-info-frame"
+          width="1150"
           height="2000"
+          style="border: none; margin-top: 20px;"
         ></iframe>
       </main>
       
