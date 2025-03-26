@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   signupForm.addEventListener("submit", async function (e) {
     e.preventDefault();
-
+    const name = document.getElementById("name").value;
     const username = document.getElementById("username").value.trim();
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
           username,
           email,
           password,
+          first_name: name, // ✅ 이름 따로 저장
           profile: {
             birthdate,
             region,
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       const data = await response.json();
-
+      console.log("응답데이터:", data);
       if (response.ok) {
         alert("회원가입이 완료되었습니다. 로그인해주세요.");
         window.location.href = "login.html";

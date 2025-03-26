@@ -411,3 +411,17 @@ footer {
     text-align: right;
   }
 }
+.nav-button {
+  background-color: #006400;
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  margin-left: 10px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.nav-button:hover {
+  background-color: #004d00;
+}

@@ -30,21 +30,21 @@
       </div>
       <nav class="nav-menu">
         <nav class="nav-menu">
-          <a href="post_main.html" class="btn btn-primary">문의</a>
-          <a href="login.html" class="btn btn-primary login-btn">로그인</a>
-          <!-- 버튼 역할을 하는 링크 -->
+          <a href="post_main.html" class="nav-button">문의</a>
+          <!-- ✅ 이 줄 추가 -->
 
-          <a href="signup.html" class="btn btn-outline signup-btn">회원가입</a>
-          <!-- 회원가입 버튼도 링크로 변경 -->
           <a
             href="mypage.html"
-            class="nav-link profile-btn"
+            class="nav-button profile-btn"
             style="display: none"
             >내 정보</a
           >
-          <a href="#" class="nav-link logout-btn" style="display: none"
+          <a href="#" class="nav-button logout-btn" style="display: none"
             >로그아웃</a
           >
+
+          <a href="login.html" class="nav-button login-btn">로그인</a>
+          <a href="signup.html" class="nav-button signup-btn">회원가입</a>
         </nav>
       </nav>
 
@@ -59,7 +59,7 @@
     <main>
       <div class="background"></div>
       <div class="search-container">
-        <h2 class="search-title">주소검색</h2>
+        <img src="image/무제-2.png" alt="로고" class="logo-image" />
 
         <div class="search-box">
           
@@ -111,113 +111,6 @@
               <option>검지</option>
               <option>옵션 2</option>
             </select>
-          </div>
-
-          <!-- Weather Widget -->
-          <div class="weather-widget">
-            <div class="weather-header">
-              <span class="weather-title">현재의 날씨</span>
-              <div class="weather-tabs">
-                <span class="tab-today">오늘</span>
-                <span class="tab-divider">|</span>
-                <span class="tab-tomorrow">내일</span>
-              </div>
-            </div>
-
-            <div class="weather-content">
-              <div class="current-temp">
-                <span class="temp-value">11°</span>
-                <span class="feels-like">체감 온도 9°</span>
-              </div>
-
-              <div class="hourly-forecast">
-
-                <!-- Generate 7 hour items -->
-                <div class="hour-item">
-                  <span class="hour">9</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">10°</span>
-                </div>
-                <div class="hour-item">
-                  <span class="hour">10</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">11°</span>
-                </div>
-                <div class="hour-item">
-                  <span class="hour">11</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">12°</span>
-                </div>
-                <div class="hour-item">
-                  <span class="hour">12</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">13°</span>
-                </div>
-                <div class="hour-item">
-                  <span class="hour">13</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">14°</span>
-                </div>
-                <div class="hour-item">
-                  <span class="hour">14</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">15°</span>
-                </div>
-                <div class="hour-item">
-                  <span class="hour">15</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">16°</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Calendar -->
-            <div class="calendar">
-              <div class="calendar-grid">
-                
-                <!-- Day names -->
-                <div class="day-name">일</div>
-                <div class="day-name">월</div>
-                <div class="day-name">화</div>
-                <div class="day-name">수</div>
-                <div class="day-name">목</div>
-                <div class="day-name">금</div>
-                <div class="day-name">토</div>
-
-                <!-- Calendar dates (31 days) -->
-                <div class="date">1</div>
-                <div class="date">2</div>
-                <div class="date">3</div>
-                <div class="date">4</div>
-                <div class="date">5</div>
-                <div class="date">6</div>
-                <div class="date">7</div>
-                <div class="date">8</div>
-                <div class="date">9</div>
-                <div class="date">10</div>
-                <div class="date">11</div>
-                <div class="date">12</div>
-                <div class="date">13</div>
-                <div class="date">14</div>
-                <div class="date">15</div>
-                <div class="date">16</div>
-                <div class="date">17</div>
-                <div class="date">18</div>
-                <div class="date">19</div>
-                <div class="date">20</div>
-                <div class="date">21</div>
-                <div class="date">22</div>
-                <div class="date">23</div>
-                <div class="date">24</div>
-                <div class="date">25</div>
-                <div class="date">26</div>
-                <div class="date">27</div>
-                <div class="date">28</div>
-                <div class="date">29</div>
-                <div class="date">30</div>
-                <div class="date">31</div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

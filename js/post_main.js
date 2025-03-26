@@ -207,6 +207,49 @@
 
 //   // In a real application, this would navigate to the post detail page
 // }
+document.addEventListener("DOMContentLoaded", function () {
+  loadPosts(); // 페이지 로드시 게시글 불러오기
+});
+
+function loadPosts() {
+  fetch("http://127.0.0.1:8000/post/")
+    .then((response) => {
+      if (!response.ok) throw new Error("게시글을 불러오지 못했습니다.");
+      return response.json();
+    })
+    .then((data) => {
+      renderPostTable(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("게시글 로딩 실패");
+    });
+}
+
+function renderPostTable(posts) {
+  const tableBody = document.querySelector(".inquiry-table > tbody");
+  tableBody.innerHTML = ""; // 초기화
+
+  posts.forEach((post, index) => {
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+    <td class="column-number">${index + 1}</td>
+    <td class="column-title">
+      <a href="post_detail.html?id=${post.id}">${post.title}</a>
+    </td>
+    <td class="column-author">${post.author ?? "익명"}</td>
+    <td class="column-date">${formatDate(post.created_at)}</td>
+  `;
+
+    tableBody.appendChild(row);
+  });
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("ko-KR");
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   // ✅ 로그인 여부 확인 후 버튼 표시 조정

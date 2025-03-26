@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   background-color: #fff;
   min-height: 100vh;
@@ -287,4 +287,24 @@ body {
   .calendar-cell:nth-last-child(-n + 6) {
     border-bottom: none;
   }
+}
+.dropdown-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.dropdown-container label {
+  font-weight: bold;
+}
+
+select {
+  padding: 6px 10px;
+  font-size: 1rem;
+}
+iframe {
+  width: 100%; /* 필요에 따라 크기 조정 */
+  height: 2000px; /* 필요에 따라 크기 조정 */
+  border: none;
 }
