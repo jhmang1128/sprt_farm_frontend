@@ -80,10 +80,32 @@ async function get_crop() {
     console.log(json_crop["recommendations"][0]);
     console.log(json_crop["recommendations"][0]["crop"]);
 
+    try {
+      document.getElementById('btn_crop_01').textContent = json_crop["recommendations"][0]["crop"];
+      document.getElementById('p_crop_01').textContent = json_crop["recommendations"][0]["reason"];
+    } catch (err) {
+      document.getElementById('btn_crop_01').textContent = "";
+      document.getElementById('p_crop_01').textContent = "추천된 작물이 없습니다.";
+      console.log('error : crop 01 :', err);
+    }
 
-    document.getElementById('btn_crop_01').innerText = json_crop["recommendations"][0]["crop"];
-    document.getElementById('btn_crop_02').innerText = json_crop["recommendations"][1]["crop"];
-    document.getElementById('btn_crop_03').innerText = json_crop["recommendations"][2]["crop"];
+    try {
+      document.getElementById('btn_crop_02').textContent = json_crop["recommendations"][1]["crop"];
+      document.getElementById('p_crop_02').textContent = json_crop["recommendations"][1]["reason"];
+    } catch (err) {
+      document.getElementById('btn_crop_02').textContent = "";
+      document.getElementById('p_crop_02').textContent = "";
+      console.log('error : crop 02 :', err);
+    }
+    
+    try {
+      document.getElementById('btn_crop_03').textContent = json_crop["recommendations"][2]["crop"];
+      document.getElementById('p_crop_03').textContent = json_crop["recommendations"][2]["reason"];
+    } catch (err) {
+      document.getElementById('btn_crop_03').textContent = "";
+      document.getElementById('p_crop_03').textContent = "";
+      console.log('error : crop 03 :', err);
+    }
 
 
   } catch (err) {
