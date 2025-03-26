@@ -1,104 +1,83 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Form submission handling
-  const editForm = document.querySelector(".edit-form");
+document.addEventListener("DOMContentLoaded", async function () {
+  const token = localStorage.getItem("token");
+  if (!token) return alert("로그인이 필요합니다.");
 
-  editForm.addEventListener("submit", function (e) {
+  try {
+    // 1. 유저 정보 불러오기
+    const response = await fetch("http://127.0.0.1:8000/users/profile/", {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    // 2. 값 채워넣기
+    document.getElementById("name").value = data.first_name || "";
+    document.getElementById("email").value = data.email || "";
+    document.getElementById("birthdate").value = data.birthdate || "";
+    document.getElementById("region").value = data.region || "";
+    document.getElementById("crops").value = data.crops || "";
+    document.getElementById("equipment").value = data.equipment || "";
+  } catch (err) {
+    console.error("유저 정보 조회 실패:", err);
+    alert("정보를 불러오는데 실패했습니다.");
+  }
+
+  // 3. 저장 버튼 눌렀을 때
+  const form = document.querySelector(".edit-form");
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    // Get form values
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
+    const first_name = document.getElementById("name").value.trim(); // ✅ 핵심
+    const email = document.getElementById("email").value.trim();
     const birthdate = document.getElementById("birthdate").value;
     const region = document.getElementById("region").value;
     const crops = document.getElementById("crops").value;
     const equipment = document.getElementById("equipment").value;
 
-    // Validate form
-    if (!name) {
-      alert("이름을 입력해주세요.");
-      return;
+    if (!first_name || !email || !birthdate || !region) {
+      return alert("필수 항목을 모두 입력해주세요.");
     }
 
-    if (!email) {
-      alert("이메일을 입력해주세요.");
-      return;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      alert("유효한 이메일 주소를 입력해주세요.");
-      return;
-    }
+    try {
+      const response = await fetch("http://127.0.0.1:8000/users/update/", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+        body: JSON.stringify({
+          first_name,
+          email,
+          profile: {
+            birthdate,
+            region,
+            crops,
+            equipment,
+          },
+        }),
+      });
 
-    if (!birthdate) {
-      alert("생년월일을 입력해주세요.");
-      return;
-    }
-
-    if (!region) {
-      alert("지역을 입력해주세요.");
-      return;
-    }
-
-    // For demo purposes, just show the entered data
-    console.log("회원정보 수정:", {
-      name,
-      email,
-      birthdate,
-      region,
-      crops,
-      equipment,
-    });
-
-    // Simulate save success
-    alert("회원정보가 성공적으로 저장되었습니다.");
-  });
-
-  // Cancel button handling
-  const cancelButton = document.querySelector(".cancel-button");
-
-  cancelButton.addEventListener("click", function () {
-    if (confirm("변경사항을 취소하시겠습니까?")) {
-      // In a real application, this would navigate back or reset the form
-      alert("변경사항이 취소되었습니다.");
-      window.history.back();
-    }
-  });
-
-  // Navigation button handling
-  const navButtons = document.querySelectorAll(".nav-button");
-
-  navButtons.forEach((button) => {
-    button.addEventListener("click", function (e) {
-      if (this.textContent.trim() === "로그아웃") {
-        e.preventDefault();
-        alert("로그아웃 되었습니다.");
-        // In a real application, this would log the user out
+      if (response.ok) {
+        alert("회원 정보가 성공적으로 수정되었습니다.");
+        window.location.href = "mypage.html";
+      } else {
+        const error = await response.json();
+        console.error("수정 실패:", error);
+        alert("회원 정보 수정에 실패했습니다.");
       }
-    });
-  });
-
-  // Navigation link handling
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const linkText = this.textContent.trim();
-      alert(`${linkText} 페이지로 이동합니다.`);
-      // In a real application, this would navigate to the respective page
-    });
-  });
-
-  // Format birthdate input
-  const birthdateInput = document.getElementById("birthdate");
-
-  birthdateInput.addEventListener("focus", function () {
-    if (this.value === "") {
-      this.type = "date";
-    }
-  });
-
-  birthdateInput.addEventListener("blur", function () {
-    if (this.value === "") {
-      this.type = "text";
+    } catch (err) {
+      console.error("에러 발생:", err);
+      alert("서버 오류가 발생했습니다.");
     }
   });
 });
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", function (e) {
+    e.preventDefault(); // a 태그의 기본 이동 막기
+    localStorage.removeItem("token"); // 토큰 삭제
+    alert("로그아웃 되었습니다.");
+    window.location.href = "index.html"; // 홈으로 이동하거나 새로고침
+  });
+}

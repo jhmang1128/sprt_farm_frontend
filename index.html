@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
+
+  <!--===================================================================================================-->
+  <!-- head -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,30 +13,56 @@
     />
     <link rel="stylesheet" href="css/index.css" />
   </head>
+  
+  <!--===================================================================================================-->
+  <!-- body -->
   <body>
+    
+    <!------------------------------------------------------------------------------------------------------->
     <!-- Header -->
     <header>
       <div class="logo-container">
-        <img src="image.jepg" alt="로고" class="logo-image" />
+        <img src="image/logo.png" alt="로고" class="logo-image" />
         <div>
           <h1 class="site-title">들어와라, 내땅에</h1>
           <p class="site-subtitle">comeon, my ground</p>
         </div>
       </div>
       <nav class="nav-menu">
-        <a href="#">문의</a>
-        <button class="btn btn-primary">로그인</button>
-        <button class="btn btn-outline">회원가입</button>
+        <nav class="nav-menu">
+          <a href="post_main.html" class="nav-button">문의</a>
+          <!-- ✅ 이 줄 추가 -->
+
+          <a
+            href="mypage.html"
+            class="nav-button profile-btn"
+            style="display: none"
+            >내 정보</a
+          >
+          <a href="#" class="nav-button logout-btn" style="display: none"
+            >로그아웃</a
+          >
+
+          <a href="login.html" class="nav-button login-btn">로그인</a>
+          <a href="signup.html" class="nav-button signup-btn">회원가입</a>
+        </nav>
       </nav>
+
+      <!-- 로그인 버튼이 클릭되면 로그인 페이지로 이동 -->
+      <!-- <a href="post_main.html" class="nav-btn inquiry">문의</a>
+      <a href="mypage.html" class="nav-btn my-info">내정보</a>
+      <a href="logout_index.html" class="nav-btn logout">로그아웃</a> -->
     </header>
 
+    <!------------------------------------------------------------------------------------------------------->
     <!-- Main Content -->
     <main>
       <div class="background"></div>
       <div class="search-container">
-        <h2 class="search-title">주소검색</h2>
+        <img src="image/무제-2.png" alt="로고" class="logo-image" />
 
         <div class="search-box">
+          
           <!-- Search Bar -->
           <div class="search-bar">
             <div class="search-type">
@@ -43,13 +72,18 @@
                 <option>도로명</option>
               </select>
             </div>
+
+            <!-- input address -->
+            <!-- input tag 안에 value 값 지정하면 안되는거 같음. 지우니까 JS에서 값 받아와짐 -->
             <input
               type="text"
+              id="input_text_search"
               class="search-input"
-              value="도로명 예시 : 전북특별자치도 은하군 홍길동 서린 579"
               placeholder="지번 예시 : 경북특별자치도 은하군 홍길동 특정리 555"
             />
-            <button class="search-button">
+
+            <!-- search button -->
+            <button id="search_button_01" class="search_button" >
               <svg
                 class="search-icon"
                 xmlns="http://www.w3.org/2000/svg"
@@ -78,115 +112,11 @@
               <option>옵션 2</option>
             </select>
           </div>
-
-          <!-- Weather Widget -->
-          <div class="weather-widget">
-            <div class="weather-header">
-              <span class="weather-title">현재의 날씨</span>
-              <div class="weather-tabs">
-                <span class="tab-today">오늘</span>
-                <span class="tab-divider">|</span>
-                <span class="tab-tomorrow">내일</span>
-              </div>
-            </div>
-
-            <div class="weather-content">
-              <div class="current-temp">
-                <span class="temp-value">11°</span>
-                <span class="feels-like">체감 온도 9°</span>
-              </div>
-
-              <div class="hourly-forecast">
-                <!-- Generate 7 hour items -->
-                <div class="hour-item">
-                  <span class="hour">9</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">10°</span>
-                </div>
-                <div class="hour-item">
-                  <span class="hour">10</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">11°</span>
-                </div>
-                <div class="hour-item">
-                  <span class="hour">11</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">12°</span>
-                </div>
-                <div class="hour-item">
-                  <span class="hour">12</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">13°</span>
-                </div>
-                <div class="hour-item">
-                  <span class="hour">13</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">14°</span>
-                </div>
-                <div class="hour-item">
-                  <span class="hour">14</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">15°</span>
-                </div>
-                <div class="hour-item">
-                  <span class="hour">15</span>
-                  <div class="hour-icon"></div>
-                  <span class="hour-temp">16°</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Calendar -->
-            <div class="calendar">
-              <div class="calendar-grid">
-                <!-- Day names -->
-                <div class="day-name">일</div>
-                <div class="day-name">월</div>
-                <div class="day-name">화</div>
-                <div class="day-name">수</div>
-                <div class="day-name">목</div>
-                <div class="day-name">금</div>
-                <div class="day-name">토</div>
-
-                <!-- Calendar dates (31 days) -->
-                <div class="date">1</div>
-                <div class="date">2</div>
-                <div class="date">3</div>
-                <div class="date">4</div>
-                <div class="date">5</div>
-                <div class="date">6</div>
-                <div class="date">7</div>
-                <div class="date">8</div>
-                <div class="date">9</div>
-                <div class="date">10</div>
-                <div class="date">11</div>
-                <div class="date">12</div>
-                <div class="date">13</div>
-                <div class="date">14</div>
-                <div class="date">15</div>
-                <div class="date">16</div>
-                <div class="date">17</div>
-                <div class="date">18</div>
-                <div class="date">19</div>
-                <div class="date">20</div>
-                <div class="date">21</div>
-                <div class="date">22</div>
-                <div class="date">23</div>
-                <div class="date">24</div>
-                <div class="date">25</div>
-                <div class="date">26</div>
-                <div class="date">27</div>
-                <div class="date">28</div>
-                <div class="date">29</div>
-                <div class="date">30</div>
-                <div class="date">31</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </main>
 
+    <!------------------------------------------------------------------------------------------------------->
     <!-- Footer -->
     <footer>
       <div class="footer-container">
@@ -229,14 +159,32 @@
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
-            <div
-              style="
-                width: 20px;
-                height: 20px;
-                background-color: #e5e7eb;
-                border-radius: 4px;
-              "
-            ></div>
+
+            <a href="https://www.notion.so" target="_blank">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="2"
+                  y="2"
+                  width="20"
+                  height="20"
+                  rx="3"
+                  ry="3"
+                  stroke="black"
+                  stroke-width="2"
+                  fill="white"
+                />
+                <path d="M6 7H18V17H6V7Z" stroke="black" stroke-width="2" />
+                <path d="M8 10H16" stroke="black" stroke-width="2" />
+                <path d="M8 13H16" stroke="black" stroke-width="2" />
+                <path d="M8 16H12" stroke="black" stroke-width="2" />
+              </svg>
+            </a>
           </div>
         </div>
 
@@ -246,6 +194,9 @@
         </div>
       </div>
     </footer>
-    <script src="js/main.js"></script>
+
+    <!--===================================================================================================-->
+    <!-- script -->
+    <script src="js/index.js"></script>
   </body>
 </html>

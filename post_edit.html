@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>문의 글쓰기</title>
+    <title>문의 글쓰기 / 수정</title>
     <link rel="stylesheet" href="css/post_edit.css" />
   </head>
   <body>
@@ -11,11 +11,11 @@
       <!-- Header -->
       <header class="header">
         <div class="nav-left">
-          <a href="#" class="nav-link">문의</a>
+          <a href="post_main.html" class="nav-link">← 문의 목록</a>
         </div>
         <div class="nav-right">
-          <a href="#" class="nav-button profile-active">내정보</a>
-          <a href="#" class="nav-button">로그아웃</a>
+          <a href="mypage.html" class="nav-button profile-active">내정보</a>
+          <a href="index.html" class="nav-button">로그아웃</a>
         </div>
       </header>
 
@@ -36,17 +36,18 @@
               name="content"
               class="form-control"
               rows="8"
+              placeholder="내용을 입력하세요..."
             ></textarea>
           </div>
 
           <div class="form-actions">
-            <button type="submit" class="submit-button">글쓰기</button>
+            <button type="submit" class="submit-button">저장</button>
             <button type="button" class="cancel-button">취소</button>
           </div>
         </form>
       </main>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/post_edit.js"></script>
   </body>
 </html>

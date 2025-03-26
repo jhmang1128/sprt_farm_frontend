@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문의글 상세</title>
+    <link rel="stylesheet" href="css/post_detail.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <a href="post_main.html" class="nav-button">← 목록으로</a>
+      </header>
+
+      <main class="main-content">
+        <h1 id="post-title">제목 로딩중...</h1>
+        <div class="post-meta">
+          <span id="post-author">작성자: </span>
+          <span id="post-date">작성일: </span>
+        </div>
+        <div class="post-content" id="post-content">내용 로딩중...</div>
+
+        <!-- ✨ 수정 버튼 (본인일 경우에만 JS로 보여짐) -->
+        <div id="edit-controls" style="margin-top: 20px; display: none">
+          <a href="#" id="edit-button" class="nav-button">수정</a>
+        </div>
+
+        <!-- ✨ 댓글 목록 -->
+        <div class="comments-section">
+          <h3>댓글</h3>
+          <ul id="comment-list"></ul>
+        </div>
+
+        <!-- ✨ 댓글 작성 -->
+        <div class="comment-form">
+          <textarea
+            id="comment-content"
+            rows="4"
+            placeholder="댓글을 입력하세요"
+          ></textarea>
+          <button id="comment-submit">댓글 작성</button>
+        </div>
+      </main>
+    </div>
+
+    <script src="js/post_detail.js"></script>
+  </body>
+</html>

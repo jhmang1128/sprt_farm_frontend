@@ -28,21 +28,26 @@ header {
 }
 
 .logo {
-  width: 32px;
-  height: 32px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background-color: #16a34a;
+  background-image: url("../image/logo.png");
+  background-color: transparent;
+
+  /* 🎯 추가해야 할 속성 */
+  background-size: cover; /* 배경을 꽉 채우기 */
+  background-position: center; /* 중앙 정렬 */
+  background-repeat: no-repeat; /* 반복 방지 */
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.logo-inner {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-image: url("../image/logo.jpg");
-  background-color: #f0f9ff;
+.logo-image {
+  width: 100px; /* 원하는 가로 크기 */
+  height: 100px; /* 원하는 세로 크기 */
+  object-fit: contain; /* 이미지 비율 유지하면서 크기 조절 */
 }
 
 .site-title {
@@ -405,4 +410,18 @@ footer {
   .company-info {
     text-align: right;
   }
+}
+.nav-button {
+  background-color: #006400;
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  margin-left: 10px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.nav-button:hover {
+  background-color: #004d00;
 }

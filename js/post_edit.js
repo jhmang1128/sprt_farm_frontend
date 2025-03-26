@@ -1,84 +1,80 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Form submission handling
-  const inquiryForm = document.querySelector(".inquiry-form");
+  const form = document.querySelector(".inquiry-form");
+  const cancelButton = document.querySelector(".cancel-button");
+  const token = localStorage.getItem("token");
+  const postId = new URLSearchParams(window.location.search).get("id");
 
-  inquiryForm.addEventListener("submit", function (e) {
+  // ✨ 수정 모드: 기존 글 데이터 불러오기
+  if (postId) {
+    fetch(`http://127.0.0.1:8000/post/${postId}/`)
+      .then((res) => {
+        if (!res.ok) throw new Error("글을 불러올 수 없습니다.");
+        return res.json();
+      })
+      .then((data) => {
+        document.getElementById("title").value = data.title;
+        document.getElementById("content").value = data.content;
+      })
+      .catch((err) => {
+        console.error("글 불러오기 실패:", err);
+        alert("글을 불러오는 중 문제가 발생했습니다.");
+      });
+  }
+
+  // ✨ 제출 버튼 (글 등록 또는 수정)
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Get form values
-    const title = document.getElementById("title").value;
-    const content = document.getElementById("content").value;
+    const title = document.getElementById("title").value.trim();
+    const content = document.getElementById("content").value.trim();
 
-    // Validate form
-    if (!title) {
-      alert("제목을 입력해주세요.");
+    if (!title || !content) {
+      alert("제목과 내용을 모두 입력해주세요.");
       return;
     }
 
-    if (!content) {
-      alert("내용을 입력해주세요.");
+    if (!token) {
+      alert("로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+      window.location.href = "login.html";
       return;
     }
 
-    // For demo purposes, just show the entered data
-    console.log("문의글 작성:", {
-      title,
-      content,
-    });
+    const method = postId ? "PUT" : "POST";
+    const url = postId
+      ? `http://127.0.0.1:8000/post/${postId}/edit/`
+      : `http://127.0.0.1:8000/post/`;
 
-    // Simulate submission success
-    alert("문의글이 성공적으로 등록되었습니다.");
-
-    // Redirect to inquiry list page
-    // In a real application, this would navigate to the inquiry list page
-    setTimeout(() => {
-      alert("문의 목록 페이지로 이동합니다.");
-    }, 500);
+    fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify({ title, content }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("서버 오류 또는 권한 없음");
+        return res.json();
+      })
+      .then((data) => {
+        alert(postId ? "글이 수정되었습니다." : "문의글이 등록되었습니다.");
+        window.location.href = "post_main.html";
+      })
+      .catch((err) => {
+        console.error("글 저장 실패:", err);
+        alert("글 저장에 실패했습니다.");
+      });
   });
 
-  // Cancel button handling
-  const cancelButton = document.querySelector(".cancel-button");
-
+  // ✨ 취소 버튼
   cancelButton.addEventListener("click", function () {
     if (confirm("작성 중인 내용이 저장되지 않습니다. 취소하시겠습니까?")) {
-      // In a real application, this would navigate back to the inquiry list page
-      alert("문의 목록 페이지로 이동합니다.");
-      window.history.back();
+      window.location.href = "post_main.html";
     }
   });
 
-  // Navigation button handling
-  const navButtons = document.querySelectorAll(".nav-button");
-
-  navButtons.forEach((button) => {
-    button.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      // For demo purposes, just show an alert with the button name
-      const buttonText = this.textContent.trim();
-      alert(`${buttonText} 페이지로 이동합니다.`);
-
-      // In a real application, this would navigate to the respective page
-    });
-  });
-
-  // Navigation link handling
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      // For demo purposes, just show an alert
-      alert("문의 목록 페이지로 이동합니다.");
-
-      // In a real application, this would navigate to the inquiry list page
-    });
-  });
-
-  // Auto-resize textarea
+  // ✨ textarea 자동 높이 조절
   const textarea = document.getElementById("content");
-
   textarea.addEventListener("input", function () {
     this.style.height = "auto";
     this.style.height = this.scrollHeight + "px";
