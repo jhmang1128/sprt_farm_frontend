@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko">
-
   <!--===================================================================================================-->
   <!-- head -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>들어와라, 내땅에 - 주소검색</title>
+    <title>fArmIng-작물추천 서비스</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/index.css" />
   </head>
-  
+
   <!--===================================================================================================-->
   <!-- body -->
   <body>
-    
     <!------------------------------------------------------------------------------------------------------->
     <!-- Header -->
     <header>
       <div class="logo-container">
-        <img src="image/logo.png" alt="로고" class="logo-image" />
-        <div>
-          <h1 class="site-title">들어와라, 내땅에</h1>
-          <p class="site-subtitle">comeon, my ground</p>
-        </div>
+        <img src="image/무제-1.png" alt="로고" class="logo-image" />
+        <p class="site-subtitle">comeon, my ground</p>
+      </div>
+      
       </div>
       <nav class="nav-menu">
         <nav class="nav-menu">
@@ -57,12 +54,14 @@
     <!------------------------------------------------------------------------------------------------------->
     <!-- Main Content -->
     <main>
+      <div class="main-header">
+        <h1 class="main-title">당신의 농지를 검색하세요</h1>  <!-- 큰 제목 -->
+            <!-- 부제목 -->
+      </div>
       <div class="background"></div>
       <div class="search-container">
-        <img src="image/무제-2.png" alt="로고" class="logo-image" />
 
         <div class="search-box">
-          
           <!-- Search Bar -->
           <div class="search-bar">
             <div class="search-type">
@@ -83,33 +82,14 @@
             />
 
             <!-- search button -->
-            <button id="search_button_01" class="search_button" >
-              <svg
-                class="search-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
+              <button id="search_button_01" class="search_button">
+                검색
+              
             </button>
           </div>
 
           <!-- Filter Options -->
-          <div class="filter-options">
-            <select class="filter-select">
-              <option>제조</option>
-              <option>옵션 2</option>
-            </select>
-            <select class="filter-select">
-              <option>검지</option>
-              <option>옵션 2</option>
+          
             </select>
           </div>
         </div>
@@ -118,83 +98,29 @@
 
     <!------------------------------------------------------------------------------------------------------->
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
       <div class="footer-container">
-        <div class="footer-logo">
-          <div class="logo">
-            <div class="logo-inner"></div>
-          </div>
-          <h1 class="site-title">들어와라, 내땅에</h1>
-          <span class="site-subtitle">community ground</span>
-        </div>
-
-        <div class="footer-links">
-          <span class="tech-support">기술 문의</span>
-          <div class="social-icons">
-            <svg
-              class="social-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-              ></path>
-            </svg>
-            <svg
-              class="social-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-
-            <a href="https://www.notion.so" target="_blank">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect
-                  x="2"
-                  y="2"
-                  width="20"
-                  height="20"
-                  rx="3"
-                  ry="3"
-                  stroke="black"
-                  stroke-width="2"
-                  fill="white"
-                />
-                <path d="M6 7H18V17H6V7Z" stroke="black" stroke-width="2" />
-                <path d="M8 10H16" stroke="black" stroke-width="2" />
-                <path d="M8 13H16" stroke="black" stroke-width="2" />
-                <path d="M8 16H12" stroke="black" stroke-width="2" />
-              </svg>
-            </a>
+    
+        <!-- 왼쪽: 로고 + 텍스트 -->
+        <div class="footer-left">
           </div>
         </div>
-
-        <div class="company-info">
-          <div>회사정보 내용</div>
-          <div>copyright@info.com</div>
+    
+        <!-- 가운데: 아이콘 -->
+        <div class="footer-center">
+          <p class="footer-label">기술 문의</p>
+          
         </div>
+    
+        <!-- 오른쪽: 회사 정보 -->
+        <div class="footer-right">
+          <p>fArmIng<br />내일배움캠프프 Smart8</p>
+          <p>kdygks1996@gmail.com</p>
+          <p class="policy">개인정보처리방침<br />사이트 이용 약관</p>
+        </div>
+    
       </div>
     </footer>
-
     <!--===================================================================================================-->
     <!-- script -->
     <script src="js/index.js"></script>

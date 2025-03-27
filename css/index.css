@@ -14,20 +14,24 @@ body {
 /* Header Styles */
 header {
   display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
   align-items: center;
-  justify-content: space-between;
   padding: 16px;
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.logo-container {
+.logo-container  {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  align-items: center;     /* ← 가로 중앙 정렬 */
+  justify-content: center; /* ← 세로 중앙 정렬 */
+  margin: 0 auto;          /* ← 부모가 허용하면 가로 중앙으로 */
+  margin-left:840px;  /* ← 원하는 만큼 조절 */
+
 }
 
-.logo {
+/* .logo {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -35,6 +39,7 @@ header {
   background-color: transparent;
 
   /* 🎯 추가해야 할 속성 */
+  logo{
   background-size: cover; /* 배경을 꽉 채우기 */
   background-position: center; /* 중앙 정렬 */
   background-repeat: no-repeat; /* 반복 방지 */
@@ -42,7 +47,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .logo-image {
   width: 100px; /* 원하는 가로 크기 */
@@ -63,6 +68,20 @@ header {
 .header-buttons {
   display: flex;
   gap: 8px;
+}
+.nav-button {
+  background-color: #006400;
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  margin-left: 10px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.nav-button:hover {
+  background-color: #004d00;
 }
 
 .btn {
@@ -115,10 +134,29 @@ main {
   filter: brightness(55%);
   z-index: -1;
 }
+.main-header {
+  text-align: center;         /* 텍스트를 가운데 정렬 */
+  margin-top: 80px;           /* 화면 위에서 아래로 여백 */
+  color: white;               /* 글자색 (어두운 배경용) */
+}
+
+.main-title {
+  font-size: 36px;            /* 큰 글씨 */
+  font-weight: bold;          /* 굵은 글씨 */
+  margin-bottom: 10px;        /* 밑에 부제목과 여백 */
+}
+
+.sub-title {
+  font-size: 18px;            /* 작은 글씨 */
+  color: #aaa;                /* 회색 톤 글씨 */
+}
 
 .search-container {
   max-width: 800px;
   width: 100%;
+  justify-content: center;  /* 가로 가운데 정렬 */
+  align-items: center;      /* 세로 가운데 정렬 (필요한 경우) */
+  margin-top: 10px;   
 }
 
 .search-title {
@@ -174,254 +212,109 @@ main {
   pointer-events: none;
 }
 
-.search-input {
-  flex: 1;
-  height: 40px;
-  padding: 0 12px;
-  border: 1px solid #e5e7eb;
-  border-left: none;
-  border-right: none;
-  font-size: 14px;
-  outline: none;
-}
-
-.search-button {
-  width: 40px;
-  height: 40px;
-  border: 1px solid #e5e7eb;
-  border-radius: 0 4px 4px 0;
-  background-color: white;
+.search-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  margin-top: 30px;
 }
 
-.search-icon {
-  width: 20px;
-  height: 20px;
-  color: #6b7280;
-}
-
-.filter-options {
+.search-box {
   display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
-  padding: 0 8px;
-}
-
-.filter-select {
-  width: 96px;
-  height: 32px;
-  padding: 0 8px;
-  border: 1px solid #e5e7eb;
-  border-radius: 4px;
+  align-items: center;
   background-color: white;
-  font-size: 12px;
-  cursor: pointer;
-  appearance: none;
-  position: relative;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.weather-widget {
-  border: 1px solid #e5e7eb;
+/* 입력창 */
+.search-box input {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  width: 350px;
+}
+
+/* 검색 버튼 */
+.search_button {
+  padding: 10px 20px;
+  margin-left: 240px;              /* 버튼과 인풋 사이 여백 */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
   border-radius: 6px;
-  margin: 0 8px 8px;
-  padding: 12px;
-}
-
-.weather-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.weather-title {
-  font-size: 12px;
-  color: #6b7280;
-}
-
-.weather-tabs {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-}
-
-.tab-today {
-  color: #3b82f6;
-}
-
-.tab-divider {
-  color: #d1d5db;
-}
-
-.tab-tomorrow {
-  color: #6b7280;
-}
-
-.weather-content {
-  display: flex;
-  align-items: center;
-}
-
-.current-temp {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 16px;
-}
-
-.temp-value {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.feels-like {
-  font-size: 12px;
-  color: #6b7280;
-}
-
-.hourly-forecast {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-}
-
-.hour-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.hour {
-  font-size: 12px;
-  color: #6b7280;
-}
-
-.hour-icon {
-  width: 16px;
-  height: 16px;
-  background-color: #f3f4f6;
-  border-radius: 50%;
-  margin: 4px 0;
-}
-
-.hour-temp {
-  font-size: 12px;
-}
-
-.calendar {
-  margin-top: 16px;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-}
-
-.day-name {
-  text-align: center;
-  font-size: 12px;
-  color: #6b7280;
-  margin-bottom: 4px;
-}
-
-.date {
-  text-align: center;
-  font-size: 12px;
-  padding: 4px;
-  border-radius: 4px;
+  font-size: 16px;
   cursor: pointer;
 }
 
-.date:hover {
-  background-color: #f3f4f6;
+.search_button:hover {
+  background-color: #145017;
 }
+
 
 /* Footer Styles */
-footer {
-  background-color: white;
-  padding: 16px;
+.footer {
+  background-color: #fff;
+  padding: 10px 10px;
+  border-top: 1px solid #eee;
 }
 
 .footer-container {
-  max-width: 800px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 6px; /* 너무 넓으면 줄이기 */
+}
+
+/* 왼쪽 */
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* 가운데 */
+.footer-center {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 3px;
 }
 
-.footer-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 16px;
-}
-
-.footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.footer-links {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.tech-support {
+.footer-label {
   font-size: 12px;
-  color: #6b7280;
+  color: #444;
 }
 
-.social-icons {
+.footer-icons {
   display: flex;
-  gap: 8px;
+  gap: 2px;
 }
 
-.social-icon {
-  width: 20px;
-  height: 20px;
+.footer-icon {
+  width: 2px;
+  height: 2px;
 }
 
-.company-info {
+/* 오른쪽 */
+.footer-right {
+  text-align: right;
   font-size: 12px;
-  color: #6b7280;
-  text-align: center;
+  color: #444;
 }
 
-@media (min-width: 768px) {
-  .footer-container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .footer-top {
-    margin-bottom: 0;
-  }
-
-  .company-info {
-    text-align: right;
-  }
-}
-.nav-button {
-  background-color: #006400;
-  color: white;
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 5px;
-  margin-left: 10px;
-  font-weight: bold;
-  display: inline-block;
+.policy {
+  margin-top: 4px;
+  color: #777;
 }
 
-.nav-button:hover {
-  background-color: #004d00;
-}
+
