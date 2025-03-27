@@ -6,13 +6,27 @@
 }
 
 body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #fff;
-  color: #333;
-  line-height: 1.5;
+  margin: 0;
 }
+.logo-container {
+  width: 200px; /* 기존보다 크게 */
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ← 가로 중앙 정렬 */
+  justify-content: center; /* ← 세로 중앙 정렬 */
+  margin: 0 auto; /* ← 부모가 허용하면 가로 중앙으로 */
+  margin-left: 0px; /* ← 원하는 만큼 조절 */
+  margin-bottom: 30px;  /* ← 로그인 폼과 간격 */
 
+}
 .container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -72,8 +86,8 @@ body {
 
 /* Form Styles */
 .login-form {
-  width: 100%;
-  max-width: 400px;
+  width: 200%;
+  max-width: 800px;
 }
 
 .form-group {

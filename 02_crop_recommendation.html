@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko">
-
   <!--===================================================================================================-->
   <!-- head -->
   <head>
@@ -14,26 +13,20 @@
   <!-- body -->
   <body>
     <div class="container">
-
       <!------------------------------------------------------------------------------------------------------->
       <!-- Header -->
       <header class="header">
         <div class="logo-container">
           <div class="logo">
             <!-- error ERR_NAME_NOT_RESOLVED -->
-            <img
-              src="https://via.placeholder.com/40/16a34a/ffffff?text=🌱"
-              alt="Logo"
-            />
+            <img src="image/로고big.png" alt="Logo" class="logo-image" />
           </div>
         </div>
-
       </header>
 
       <!------------------------------------------------------------------------------------------------------->
       <!-- Main Content -->
       <main class="main-content">
-
         <!-- Background Curves -->
         <div class="background-curves">
           <div class="curve-top"></div>
@@ -41,9 +34,10 @@
           <div class="red-curve"></div>
         </div>
 
-        <!-- Location Info -->
+        <p class="location-title">📍 검색한 주소 정보</p>
+<!-- Location Info -->
         <div id="text_box_01" class="location-info">
-          검색에 사용된 주소 string 값
+          검색에 사용된 주소 string 값의 대한
         </div>
 
         <!-- Soil Analysis Table -->
@@ -96,33 +90,52 @@
         <!-- Crop Buttons -->
         <div class="crop-buttons-container">
           <div class="crop-row">
-            <button id="btn_crop_01" class="crop-btn">작물 1</button>
-            <p id="p_crop_01" class="p_crop"> reason </p>
+            <button id="btn_crop_01" class="crop-btn">추천작물 1</button>
+            <p id="p_crop_01" class="p_crop">reason</p>
           </div>
 
           <div class="crop-row">
-            <button id="btn_crop_02" class="crop-btn">작물 2</button>
-            <p id="p_crop_02" class="p_crop"> reason </p>
+            <button id="btn_crop_02" class="crop-btn">추천작물 2</button>
+            <p id="p_crop_02" class="p_crop">reason</p>
           </div>
 
           <div class="crop-row">
-            <button id="btn_crop_03" class="crop-btn">작물 3</button>
-            <p id="p_crop_03" class="p_crop"> reason </p>
+            <button id="btn_crop_03" class="crop-btn">추천작물 3</button>
+            <p id="p_crop_03" class="p_crop">reason</p>
           </div>
         </div>
-
       </main>
     </div>
-
-    <!-- 다음 페이지로 이동 버튼 -->
-    <div class="next-step-button">
-      <button id="go-to-analysis">작물 분석 페이지로 이동</button>
+ <div class="nav-right">
+      <a href="index.html" class="nav-button">처음화면으로</a>
+      <!-- ✅ 이 줄 추가 -->
     </div>
+    <div class="dropdown-group">
+      <p class="location-title"> ⚒️작물별 농작업일정 조회</p>
+      <label for="category-select">대분류: ex:채소류</label>
+      <select id="category-select">
+        <option value="">-- 대분류 선택 --</option>
+      </select>
+
+      <label for="crop-select">작물 선택: ex:상추</label>
+      <select id="crop-select" disabled>
+        <option value="">-- 대분류 먼저 선택 --</option>
+      </select>
+
+      <button id="loadCropData">정보 보기</button>
+    </div>
+
+    <iframe
+      id="crop-info-frame"
+      width="1150"
+      height="2000"
+      style="border: none; margin-top: 20px"
+    ></iframe>
+    <!-- 다음 페이지로 이동 버튼 -->
+   
 
     <!--===================================================================================================-->
     <!-- script -->
     <script src="js/02_crop_recommendation.js"></script>
   </body>
 </html>
-
-

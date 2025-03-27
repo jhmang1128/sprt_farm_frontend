@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
-    const autoLogin = document.getElementById("auto-login").checked;
 
     if (!username || !password) {
       alert("아이디와 비밀번호를 입력해주세요.");
@@ -41,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-console
+console;
 // // Navigation button handling
 // const navButtons = document.querySelectorAll(".nav-button");
 
