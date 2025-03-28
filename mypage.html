@@ -94,7 +94,7 @@
         if (!token) return alert("로그인이 필요합니다.");
 
         try {
-          const response = await fetch("http://127.0.0.1:8000/users/profile/", {
+          const response = await fetch("https://api.aicropmate.com/users/profile/", {
             method: "GET",
             headers: {
               Authorization: `Token ${token}`,

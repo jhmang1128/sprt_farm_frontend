@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ////////////////////////////////////////////////////////////////////////////////////////////////
 
   // url
-  const API_BASE_URL = 'http://127.0.0.1:8000';
+  const API_BASE_URL = 'https://api.aicropmate.com';
 
   const url_get_address = API_BASE_URL + '/chatbot/address/';
   const url_qs_add_to_soil = API_BASE_URL + '/chatbot/add_to_soil/';

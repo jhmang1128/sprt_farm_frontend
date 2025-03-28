@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // url
-  const API_BASE_URL = 'http://127.0.0.1:8000';
+  const API_BASE_URL = 'https://api.aicropmate.com';
   
 
   // 버튼/입력창 선택
