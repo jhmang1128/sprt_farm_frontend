@@ -1,10 +1,19 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+// my page - edit
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 document.addEventListener("DOMContentLoaded", async function () {
+  
+  // URL
+  const API_BASE_URL = "http://127.0.0.1:8000";
+
+
   const token = localStorage.getItem("token");
   if (!token) return alert("로그인이 필요합니다.");
 
   try {
     // 1. 유저 정보 불러오기
-    const response = await fetch("http://127.0.0.1:8000/users/profile/", {
+    const response = await fetch(`${API_BASE_URL}/users/profile/`, {
       headers: {
         Authorization: `Token ${token}`,
       },
@@ -24,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     alert("정보를 불러오는데 실패했습니다.");
   }
 
-  // 3. 저장 버튼 눌렀을 때
+  // user update - 유저 정보 수정 (Trigger - Button)
   const form = document.querySelector(".edit-form");
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -41,7 +50,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/users/update/", {
+      const response = await fetch(`${API_BASE_URL}/users/update/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
