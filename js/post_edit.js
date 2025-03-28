@@ -1,4 +1,14 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+// post edit
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 document.addEventListener("DOMContentLoaded", function () {
+  
+  // URL
+  const API_BASE_URL = "http://127.0.0.1:8000";
+
+
+  // objects
   const form = document.querySelector(".inquiry-form");
   const cancelButton = document.querySelector(".cancel-button");
   const token = localStorage.getItem("token");
@@ -6,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ✨ 수정 모드: 기존 글 데이터 불러오기
   if (postId) {
-    fetch(`http://127.0.0.1:8000/post/${postId}/`)
+    fetch(`${API_BASE_URL}/post/${postId}/`)
       .then((res) => {
         if (!res.ok) throw new Error("글을 불러올 수 없습니다.");
         return res.json();
@@ -41,8 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const method = postId ? "PUT" : "POST";
     const url = postId
-      ? `http://127.0.0.1:8000/post/${postId}/edit/`
-      : `http://127.0.0.1:8000/post/`;
+      ? `${API_BASE_URL}/post/${postId}/edit/`
+      : `${API_BASE_URL}/post/`;
 
     fetch(url, {
       method,
@@ -64,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("글 저장 실패:", err);
         alert("글 저장에 실패했습니다.");
       });
-  });
+    });
 
   // ✨ 취소 버튼
   cancelButton.addEventListener("click", function () {

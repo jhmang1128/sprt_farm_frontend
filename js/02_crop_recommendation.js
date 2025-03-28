@@ -1,42 +1,24 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//// 작물 정보 (기존 3번째 페이지에)
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Location Info
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 document.addEventListener("DOMContentLoaded", () => {
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //// header
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
-  ////////////////////////////////////////////////////////////
-  // nav
-  ////////////////////////////////////////////////////////////
-
-
-
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //// body
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  ////////////////////////////////////////////////////////////
-  // Location Info
-  ////////////////////////////////////////////////////////////
 
   // text_box
   const text_search_address = sessionStorage.getItem('text_search_value');
   document.getElementById('text_box_01').textContent = text_search_address;
 
 
-  ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////
   // Soil Analysis Table
-  ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////
 
   // url
-  const url_base_django = 'http://127.0.0.1:8000/';
-  const url_base_chatbot = 'http://127.0.0.1:8000/chatbot/';
+  const API_BASE_URL = 'http://127.0.0.1:8000';
 
-  const url_get_address = url_base_chatbot + 'address/';
-  const url_qs_add_to_soil = url_base_chatbot + 'add_to_soil/';
-  const url_qs_add_to_crop = url_base_chatbot + 'add_to_crop/';
+  const url_get_address = API_BASE_URL + '/chatbot/address/';
+  const url_qs_add_to_soil = API_BASE_URL + '/chatbot/add_to_soil/';
+  const url_qs_add_to_crop = API_BASE_URL + '/chatbot/add_to_crop/';
 
 
   // PNU 코드 및 좌표 값 추출 ✅
@@ -53,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const res_soil = await fetch(url_qs_soil);
       const json_soil = await res_soil.json();
       
-      // 토양 영양 테이블 값
+      // 토지 영양 테이블 값
       document.getElementById('sn_01').textContent = json_soil["soil_data"]["PNU_Code"];
       document.getElementById('sn_02').textContent = json_soil["soil_data"]["Exam_Day"];
       document.getElementById('sn_03').textContent = json_soil["soil_data"]["ACID"];
@@ -81,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const res_crop = await fetch(url_qs_crop);
       const json_crop = await res_crop.json();
 
+      // 추천 1
       try {
         document.getElementById('btn_crop_01').textContent = json_crop["recommendations"][0]["crop"];
         document.getElementById('p_crop_01').textContent = json_crop["recommendations"][0]["reason"];
@@ -90,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log('error : crop 01 :', err);
       }
 
+      // 추천 2
       try {
         document.getElementById('btn_crop_02').textContent = json_crop["recommendations"][1]["crop"];
         document.getElementById('p_crop_02').textContent = json_crop["recommendations"][1]["reason"];
@@ -99,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log('error : crop 02 :', err);
       }
       
+      // 추천 3
       try {
         document.getElementById('btn_crop_03').textContent = json_crop["recommendations"][2]["crop"];
         document.getElementById('p_crop_03').textContent = json_crop["recommendations"][2]["reason"];
@@ -114,9 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   get_crop();
   
-  ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////
   // iframe - 농사로 페이지 로드
-  ////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////
 
   const categorySelect = document.getElementById("category-select");
   const cropSelect = document.getElementById("crop-select");
@@ -127,10 +112,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ✅ 1. 두 API 호출 (드롭다운 + 링크 맵)
   Promise.all([
-    fetch("http://localhost:8000/crawled_data/get-crop-options/").then((res) =>
+    fetch(API_BASE_URL + "/crawled_data/get-crop-options/").then((res) =>
       res.json()
     ),
-    fetch("http://localhost:8000/crawled_data/get-links/").then((res) =>
+    fetch(API_BASE_URL + "/crawled_data/get-links/").then((res) =>
       res.json()
     ),
   ]).then(([categoryRes, linkRes]) => {
@@ -143,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
       categorySelect.appendChild(opt);
     }
   });
+
 
   // ✅ 2. 대분류 선택 시 소분류 채우기
   categorySelect.addEventListener("change", () => {
@@ -162,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cropSelect.appendChild(opt);
     });
   });
+
 
   // ✅ 3. 선택 후 버튼 클릭 시 iframe에 링크 띄우기
   document.getElementById("loadCropData").addEventListener("click", () => {

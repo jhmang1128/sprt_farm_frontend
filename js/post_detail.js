@@ -1,14 +1,24 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+// post detail
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 document.addEventListener("DOMContentLoaded", () => {
+  
+  // URL
+  const API_BASE_URL = "http://127.0.0.1:8000";
+
+  //objects
   const token = localStorage.getItem("token");
   const params = new URLSearchParams(window.location.search);
   const postId = params.get("id");
 
+  
   if (!postId) {
     alert("글 ID가 없습니다!");
     return;
   }
 
-  fetch(`http://127.0.0.1:8000/post/${postId}/`)
+  fetch(`${API_BASE_URL}/post/${postId}/`)
     .then((res) => res.json())
     .then((post) => {
       document.getElementById("post-title").textContent = post.title;
@@ -42,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    fetch(`http://127.0.0.1:8000/post/${postId}/`, {
+    fetch(`${API_BASE_URL}/post/${postId}/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadComments();
 
   function loadComments() {
-    fetch(`http://127.0.0.1:8000/post/${postId}/`)
+    fetch(`${API_BASE_URL}/post/${postId}/`)
       .then((res) => res.json())
       .then((post) => {
         const list = document.getElementById("comment-list");
@@ -85,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ✨ 로그인된 사용자 정보 가져오기
   function getUserInfo() {
-    return fetch("http://127.0.0.1:8000/users/profile/", {
+    return fetch(`${API_BASE_URL}/users/profile/`, {
       headers: {
         Authorization: `Token ${token}`,
       },
